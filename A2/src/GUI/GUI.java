@@ -1,10 +1,18 @@
 package GUI;
 
+import Cards.CharacterCard;
+import Cards.RoomCard;
+import Cards.WeaponCard;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
 
-public abstract class GUI {
+public class GUI {
+
+    private RoomCard murderRoom;
+    private WeaponCard murderWeapon;
+    private CharacterCard murderCard;
 
     public GUI() {
         initialise();
@@ -56,8 +64,9 @@ public abstract class GUI {
         //LAYOUT
 
 
-
-
     }
+
+
+
 
 }

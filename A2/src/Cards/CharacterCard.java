@@ -6,8 +6,8 @@ import CluedoGame.CharacterType;
  * Character cards
  * Contains character card methods
  */
-class CharacterCard implements Card {
-    public CharacterType characters = null;
+public class CharacterCard implements Card {
+    public CharacterType characters;
 
     /** Constructor */
     public CharacterCard (CharacterType c){

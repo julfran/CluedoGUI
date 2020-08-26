@@ -1,6 +1,6 @@
 package Cells;
 
-public class MurderCell implements cluedo.Cell {
+public class MurderCell implements Cell {
     private int xPos;
     private int yPos;
 

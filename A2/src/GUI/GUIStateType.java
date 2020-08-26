@@ -7,5 +7,4 @@ public enum GUIStateType {
     ENDGAME,
     STARTGAME,
     MOVE,
-    GAMEEND
 }

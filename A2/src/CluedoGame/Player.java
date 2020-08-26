@@ -1,10 +1,8 @@
 package CluedoGame;
 import Cards.Card;
-import Cards.RoomType;
 import Cells.Cell;
-import Cells.RoomCell;
+import GUI.GUIStateType;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,28 +12,77 @@ public class Player {
 	private Cell currentLocation;
 	private String playerName;
 	private boolean isEliminated = false;
-	private int stepsAvailable;
+	private int numSteps;
 
 
 	/**Constructor
 	 * @param c- players chosen character type
 	 * @param name- players name input for that character
 	 * */
-	public Player(CharacterType c, String name){
+	public Player(CharacterType c, String name, GUIStateType state){
 		this.myCharacterType = c;
 		this.playerName = name;
 		isEliminated = false;
 		myCardList = new HashSet<Card>();
 	}
 
-	//method to get character
-	//method to get name of character
-	//method to change if player is still in the game
-	//method to get location of player
-	//method to set location of player
-	//method to add card to cardlist
-	//method to set the stepsavailable
-	//method to get available step
+	/**
+	 * getCharacterType returns the player's type of the character
+	 * @return myCharacterType
+	 * */
+	public CharacterType getCharacterType (){
+		return myCharacterType;
+	}
+
+	/**
+	 * getName returns the name of the player's character
+	 * @return playerName
+	 * */
+	public String getPlayerName(){
+		return playerName;
+	}
+
+	/**
+	 * getCell returns the cell location of the player
+	 * */
+	public void getCell(Cell c){
+		currentLocation = c;
+	}
+
+	/**
+	 * @return Set the player to isEliminated equal to true
+	 * */
+	public boolean eliminatePlayer(){
+		return this.isEliminated = true;
+	}
+
+	/**
+	 * @return get current players set of cards
+	 * */
+	public Set <Card> getHand(){
+		return myCardList;
+	}
+
+	/**
+	 * Sets current player's amount of steps it can make.
+	 * This value is retrieved from the dice sum value.
+	 * */
+	public void setNumStep(int steps){
+		this.numSteps = steps;
+	}
+
+	/**
+	 * Gets current player's amount of steps it can make
+	 * This value is retrieved from the dice sum value.
+	 * */
+	public int getNumSteps(){
+		return numSteps;
+	}
+
+	/**
+	 * Check if player wants to Accuse
+	 * */
+
 	//method to check if move is possible
 
 	//------------

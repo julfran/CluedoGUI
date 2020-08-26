@@ -1,16 +1,20 @@
 package CluedoGame;
+import Cards.RoomType;
+import Cells.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class Board {
-	private Cell [][] cell;
-	ArrayList <Player> players;
-	//private List<Room> room;
-	HashMap<RoomType, RoomCell> initCells= new HashMap<>();
-	HashMap<RoomType, List<DoorCell>> roomDoor = new HashMap<>();
-
+	public static int BOARD_WIDTH;
+	public static int BOARD_HEIGHT;
+	private Cell[][] cell = new Cell[22][22];
+	private int numOfPlayers ;
+	private ArrayList <Player> players;
+	private HashMap<RoomType, RoomCell> initCells= new HashMap<>();
+	private HashMap<RoomType, List<DoorCell>> roomDoor = new HashMap<>();
 
 
 	public Board(ArrayList<Player> p){
@@ -20,38 +24,32 @@ public class Board {
 		int y =0;
 
 		String initialCellBoard =
-					".........W....G.........\n" +
-					"KKKKKK....AAAA....CCCCCC\n" +
-					"KKKKKK..AAAAAAAA..CCCCCC\n" +
-					"KKKKKK..AAAAAAAA..CCCCCC\n"+
-					"KKKKKK..AAAAAAAA..+CCCCC\n"+
-					"KKKKKK..+AAAAAA+...CCCC.\n"+
-					".KKKK+..AAAAAAAA........\n"+
-					"........A+AAAA+A.......E\n"+
-					"..................BBBBBB\n"+
-					"DDDDDDDD..........+BBBBB\n"+
-					"DDDDDDDD..|||||...BBBBBB\n"+
-					"DDDDDDD+..|||||...BBBBBB\n"+
-					"DDDDDDDD..|||||...BBBB+B\n"+
-					"DDDDDDDD..|||||.........\n"+
-					"DDDDDDDD..|||||...LL+LL.\n"+
-					"DDDDDD+D..|||||..LLLLLLL\n"+
-					"..........|||||..+LLLLLL\n"+
-					"M................LLLLLLL\n"+
-					".........HH++HH...LLLLL.\n"+
-					"OOOOOO+..HHHHHH........P\n"+
-					"OOOOOOO..HHHHH+.........\n"+
-					"OOOOOOO..HHHHHH..+SSSSSS\n"+
-					"OOOOOOO..HHHHHH..SSSSSSS\n"+
-					"OOOOOOO..HHHHHH..SSSSSSS\n"+
-					"OOOOOO.R.HHHHHH...SSSSSS\n";
+					//"KKKKKK...WAAAA....CCCCCC\n" +
+					"KKKKKK...WAAA....CCCCC\n" +
+					"KKKKKK..AAAAAAA..CCCCC\n"+
+					"KKKKKK..AAAAAAA..+CCCC\n"+
+					"KKKKKK..AAAAAAA...CCCE\n"+
+					"KKKK+K..+AAAAA+.......\n"+
+					"G.......A+AAA+A.......\n"+
+					".................BBB+B\n"+
+					"DDDDD............+BBBB\n"+
+					"DDDDDDDD..+|||+..BBBBB\n"+
+					"DDDDDDD+..|||||..BBBBB\n"+
+					"DDDDDDDD..|||||..BBBB+\n"+
+					"DDDDDDDD..|||||.......\n"+
+					"DDDDDDDD..|||||..LL+LL\n"+
+					"DDDD+DDD..|||||.LLLLLL\n"+
+					"M.........|||||.+LLLLL\n"+
+					"................LLLLLL\n"+
+					".........HH++HH..LLLLL\n"+
+					"OOOOOO+..HHHHHH.......\n"+
+					"OOOOOOO..HHHHH+......P\n"+
+					"OOOOOOO..HHHHHH.S+SSSS\n"+
+					"OOOOOOO..HHHHHH.SSSSSS\n"+
+					"OOOOOOO.RHHHHHH.SSSSSS\n";
 
 
 		for(char s: initialCellBoard.toCharArray()){
-			if(x == cell[0].length){
-				x=0;
-				y++;
-			}
 			//DoorCell
 			if(s == '+'){
 				cell[y][x] = new DoorCell(x,y);
@@ -63,6 +61,10 @@ public class Board {
 			//MidCell/MurderCell
 			else if(s == '|'){
 				cell[y][x] = new MurderCell(x,y);
+			}
+			else if(x == cell[0].length){
+				x=0;
+				y++;
 			}
 			//RoomCell
 			else{
@@ -110,31 +112,46 @@ public class Board {
 	 * */
 	private void setPlayerPos(){
 		for(Player p: players){
-			if(p.getName().equals(CharacterType.COLONELMUSTARD)){
+			if(p.getCharacterType().equals(CharacterType.COLONELMUSTARD)){
 				((HallwayCell)cell[18][0]).putPlayer(p);
 				p.getCell(cell[18][0]);
 			}
-			else if(p.getName().equals(CharacterType.MRSPEACOCK)){
+			else if(p.getCharacterType().equals(CharacterType.MRSPEACOCK)){
 				((HallwayCell)cell[7][23]).putPlayer(p);
 				p.getCell(cell[7][23]);
 			}
-			else if(p.getName().equals(CharacterType.MISSSCARLETT)){
+			else if(p.getCharacterType().equals(CharacterType.MISSSCARLETT)){
 				((HallwayCell)cell[25][7]).putPlayer(p);
 				p.getCell(cell[25][7]);
 			}
-			else if(p.getName().equals(CharacterType.MRSWHITE)){
+			else if(p.getCharacterType().equals(CharacterType.MRSWHITE)){
 				((HallwayCell)cell[1][9]).putPlayer(p);
 				p.getCell(cell[1][9]);
 			}
-			else if(p.getName().equals(CharacterType.MRGREEN)){
+			else if(p.getCharacterType().equals(CharacterType.MRGREEN)){
 				((HallwayCell)cell[1][14]).putPlayer(p);
 				p.getCell(cell[1][14]);
 			}
-			else if(p.getName().equals(CharacterType.PROFESSORPLUM)){
+			else if(p.getCharacterType().equals(CharacterType.PROFESSORPLUM)){
 				((HallwayCell)cell[20][23]).putPlayer(p);
 				p.getCell(cell[20][23]);
 			}
 		}
+	}
+
+	/**
+	 * Get player that currently has its turn
+	 * */
+	public Player getCurrentPlayer(){
+
+	}
+
+	/**
+	 * Sets up the board cell information
+	 * Doors, Room cells, Murder Cell(unreachable)
+	 * */
+	private void setupBoardCell(){
+
 	}
 
 	/**

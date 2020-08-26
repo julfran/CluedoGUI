@@ -1,5 +1,8 @@
 package Cells;
 
+import Cards.RoomType;
+import CluedoGame.Player;
+
 public class RoomCell implements Cell {
 
 	private int xPos;
@@ -13,7 +16,9 @@ public class RoomCell implements Cell {
 		room =r;
 	}
 
-	public RoomType getRoomType(){
+
+
+    public RoomType getRoomType(){
 		return room;
 	}
 

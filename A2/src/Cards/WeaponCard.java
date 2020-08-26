@@ -4,7 +4,7 @@ package Cards;
  * Weapon cards
  * Contains weapon card methods
  */
-class WeaponCard implements Card {
+public class WeaponCard implements Card {
     WeaponType weapon = null;
 
     /** Constructor */
