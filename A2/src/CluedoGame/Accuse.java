@@ -40,6 +40,17 @@ public class Accuse {
         }
         return false;
     }
+    
+    
+//     //If player successfully guesses murder weapons right
+//         if(murderCharacter.characters != c && murderWeapon.getWeapon() != w && murderRoom.rooms != r){
+//                 System.out.println("You have not found the murderer.");
+//                 return false;
+
+//         }
+
+//         return true;
+//     }
 
 
     public String toString() {
