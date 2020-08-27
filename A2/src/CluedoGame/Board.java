@@ -112,30 +112,30 @@ public class Board {
 	 * Set Players Initial positions when game starts
 	 * */
 	private void setPlayerPos(){
-		for(Player p: defaultPlayers){
+		for(Player p: players){
 			if(p.getCharacterType().equals(CharacterType.COLONELMUSTARD)){
-				((HallwayCell)cell[18][0]).putPlayer(p);
-				p.getCell(cell[18][0]);
+				((HallwayCell)cell[0][6]).putPlayer(p);
+				p.getCell(cell[0][6]);
 			}
 			else if(p.getCharacterType().equals(CharacterType.MRSPEACOCK)){
-				((HallwayCell)cell[7][23]).putPlayer(p);
-				p.getCell(cell[7][23]);
+				((HallwayCell)cell[22][5]).putPlayer(p);
+				p.getCell(cell[22][5]);
 			}
 			else if(p.getCharacterType().equals(CharacterType.MISSSCARLETT)){
-				((HallwayCell)cell[25][7]).putPlayer(p);
-				p.getCell(cell[25][7]);
+				((HallwayCell)cell[0][15]).putPlayer(p);
+				p.getCell(cell[0][15]);
 			}
 			else if(p.getCharacterType().equals(CharacterType.MRSWHITE)){
-				((HallwayCell)cell[1][9]).putPlayer(p);
-				p.getCell(cell[1][9]);
+				((HallwayCell)cell[9][22]).putPlayer(p);
+				p.getCell(cell[9][22]);
 			}
 			else if(p.getCharacterType().equals(CharacterType.MRGREEN)){
-				((HallwayCell)cell[1][14]).putPlayer(p);
-				p.getCell(cell[1][14]);
+				((HallwayCell)cell[22][19]).putPlayer(p);
+				p.getCell(cell[22][19]);
 			}
 			else if(p.getCharacterType().equals(CharacterType.PROFESSORPLUM)){
-				((HallwayCell)cell[20][23]).putPlayer(p);
-				p.getCell(cell[20][23]);
+				((HallwayCell)cell[10][0]).putPlayer(p);
+				p.getCell(cell[10][0]);
 			}
 		}
 	}
