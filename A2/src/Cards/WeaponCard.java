@@ -5,7 +5,7 @@ package Cards;
  * Contains weapon card methods
  */
 public class WeaponCard implements Card {
-    WeaponType weapon = null;
+    public WeaponType weapon;
 
     /** Constructor */
     public WeaponCard (WeaponType weapon){
@@ -17,10 +17,10 @@ public class WeaponCard implements Card {
     public String toString(){
         return weapon.toString();
     }
-    
+
     public WeaponType getWeapon(){
         return weapon;
     }
-    
+
 
 }

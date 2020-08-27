@@ -12,6 +12,7 @@ public class Player {
 	private Cell currentLocation;
 	private String playerName;
 	private boolean isEliminated = false;
+	private boolean isPlaying = false;
 	private int numSteps;
 
 
@@ -89,8 +90,7 @@ public class Player {
 	//SUGGESTION
 
 
-	//------------
-	//ACCUSE
+
 
 
 	//------------

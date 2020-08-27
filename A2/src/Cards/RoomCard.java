@@ -5,7 +5,7 @@ package Cards;
  * Contains room card methods
  */
 public class RoomCard implements Card {
-    public RoomType rooms = null;
+    public final RoomType rooms;
 
     /** Constructor */
     public RoomCard(RoomType rt){
@@ -16,9 +16,8 @@ public class RoomCard implements Card {
     public String toString(){
         return rooms.toString();
     }
-    
+
     public RoomType getRoom() {
         return rooms;
     }
-    
 }

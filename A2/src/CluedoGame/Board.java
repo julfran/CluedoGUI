@@ -12,19 +12,20 @@ public class Board {
 	public static int BOARD_HEIGHT;
 	private Cell[][] cell = new Cell[22][22];
 	private int numOfPlayers ;
-	private ArrayList <Player> players;
+	private ArrayList <Player> defaultPlayers;
+	private HashMap <CharacterType, Player> currentPlayers = new HashMap<>();
 	private HashMap<RoomType, RoomCell> initCells= new HashMap<>();
 	private HashMap<RoomType, List<DoorCell>> roomDoor = new HashMap<>();
+	private CharacterType currentPlayer;
 
 
 	public Board(ArrayList<Player> p){
 
-		players = p;
+		defaultPlayers = p;
 		int x= 0;
 		int y =0;
 
 		String initialCellBoard =
-					//"KKKKKK...WAAAA....CCCCCC\n" +
 					"KKKKKK...WAAA....CCCCC\n" +
 					"KKKKKK..AAAAAAA..CCCCC\n"+
 					"KKKKKK..AAAAAAA..+CCCC\n"+
@@ -111,7 +112,7 @@ public class Board {
 	 * Set Players Initial positions when game starts
 	 * */
 	private void setPlayerPos(){
-		for(Player p: players){
+		for(Player p: defaultPlayers){
 			if(p.getCharacterType().equals(CharacterType.COLONELMUSTARD)){
 				((HallwayCell)cell[18][0]).putPlayer(p);
 				p.getCell(cell[18][0]);
@@ -143,7 +144,15 @@ public class Board {
 	 * Get player that currently has its turn
 	 * */
 	public Player getCurrentPlayer(){
+		return currentPlayers.get(currentPlayer);
+	}
 
+	/**
+	 * Get any cell in a bord with given
+	 * x and y coordinates
+	 * */
+	public Cell getCell(int xPos, int yPos){
+		return cell[xPos][yPos];
 	}
 
 	/**
@@ -155,25 +164,6 @@ public class Board {
 	}
 
 	/**
-	 * getCell method returns the x and y value of
-	 * chosen cell
-	 * */
-	public Cell getCell(int x, int y){
-		return cell[y][x];
-	}
-
-//	/**
-//	 * Resets cells to default state
-//	 * */
-//	public void redoCells(){
-//		for(Cell[] c : cell){
-//			for(Cell e :c ){
-//				e.setVisit(false);
-//			}
-//		}
-//	}
-
-	/**
 	 * getRoomDoors returns a list of doors for that room
 	 * */
 	public List<DoorCell> getRoomDoors (RoomType room){
@@ -181,6 +171,8 @@ public class Board {
 	}
 
 
+
+	//
 
 
 }
