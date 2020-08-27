@@ -29,7 +29,7 @@ public class GUI {
         });
         //---------------------------------------------------------------------------------
         //Move Button
-        JButton start = new JButton("Move");
+        JButton move = new JButton("Move");
         move.addActionListener(new ActionListener(){
 
         });
