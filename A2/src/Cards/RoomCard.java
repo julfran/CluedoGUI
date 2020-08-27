@@ -16,4 +16,9 @@ public class RoomCard implements Card {
     public String toString(){
         return rooms.toString();
     }
+    
+    public RoomType getRoom() {
+        return rooms;
+    }
+    
 }
