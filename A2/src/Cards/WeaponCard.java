@@ -17,5 +17,10 @@ public class WeaponCard implements Card {
     public String toString(){
         return weapon.toString();
     }
+    
+    public WeaponType getWeapon(){
+        return weapon;
+    }
+    
 
 }
