@@ -67,7 +67,7 @@ public class Board {
 				x=0;
 				y++;
 			}
-			//RoomCell
+			//RoomCell where the players will stand when they enter the room
 			else{
 				if(s == 'K'){
 					cell[y][x] = new RoomCell(x,y,RoomType.KITCHEN);
