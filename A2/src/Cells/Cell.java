@@ -1,5 +1,7 @@
 package Cells;
 
+import CluedoGame.Player;
+
 public interface Cell {
 
     public int getXPos();
