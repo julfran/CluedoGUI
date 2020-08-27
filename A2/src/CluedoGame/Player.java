@@ -1,13 +1,17 @@
 package CluedoGame;
 import Cards.Card;
+import Cards.CharacterCard;
+import Cards.RoomCard;
+import Cards.WeaponCard;
 import Cells.Cell;
 import GUI.GUIStateType;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
-	private Set<Card> myCardList;
+	private ArrayList<Card> myCardList = new ArrayList<>();
 	private CharacterType myCharacterType;
 	private Cell currentLocation;
 	private String playerName;
@@ -60,8 +64,19 @@ public class Player {
 	/**
 	 * @return get current players set of cards
 	 * */
-	public Set <Card> getHand(){
+	public ArrayList <Card> getHand(){
 		return myCardList;
+	}
+
+	/**
+	 * Add cards to Player's hand
+	 * @param c cards to be added to hand
+	 * */
+	public void addHand(Card c){
+		if((c instanceof RoomCard || c instanceof CharacterCard
+				|| c instanceof WeaponCard)){
+			myCardList.add(c);
+		}
 	}
 
 	/**
@@ -80,9 +95,7 @@ public class Player {
 		return numSteps;
 	}
 
-	/**
-	 * Check if player wants to Accuse
-	 * */
+
 
 	//method to check if move is possible
 
