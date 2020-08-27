@@ -1,5 +1,8 @@
 package Cells;
 
+import Cards.RoomType;
+import CluedoGame.Player;
+
 public class DoorCell implements Cell {
 
 	private int xPos;
