@@ -42,6 +42,10 @@ public class RoomCell implements Cell {
 		return player;
 	}
 
+	public boolean canTakePlayer() {
+		return true;
+	}
+
 //	private int x;
 //	private int y;
 //	private Board board;
