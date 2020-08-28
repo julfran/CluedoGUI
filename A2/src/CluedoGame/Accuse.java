@@ -17,29 +17,6 @@ public class Accuse {
         this.accusedCharacter = character;
     }
 
-    /**
-     * Implements the accuse strategy where it checks if the accused
-     * elements al match the murder set.
-     * */
-    public boolean doAccusation(Board b, List<Player> players, WeaponType w, RoomType r, CharacterType c,
-                                WeaponCard murderWeapon, RoomCard murderRoom, CharacterCard murderCharacter){
-
-      CharacterType p = b.getCurrentPlayer(); //get current players
-
-        //If player successfully guesses murder weapons right
-        if(murderCharacter.characters == c){
-            if(murderWeapon.weapons == w){
-                if(murderRoom.rooms == r){
-                    return true;
-                }
-            }
-        }
-        //else game proceeds
-        else {
-
-        }
-        return false;
-    }
     
     
 //     //If player successfully guesses murder weapons right
