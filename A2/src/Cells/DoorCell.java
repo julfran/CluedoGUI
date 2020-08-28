@@ -1,5 +1,8 @@
 package Cells;
 
+import Cards.RoomType;
+import CluedoGame.Player;
+
 public class DoorCell implements Cell {
 
 	private int xPos;
@@ -42,6 +45,14 @@ public class DoorCell implements Cell {
 	@Override
 	public void putPlayer(Player p) {
 		player =p;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public boolean canTakePlayer() {
+		return false;
 	}
 
 
