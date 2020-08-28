@@ -34,6 +34,14 @@ public class HallwayCell implements Cell {
 		return player;
 	}
 
+	public boolean canTakePlayer() {
+		if (getPlayer() == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 //	private int x;
 //	private int y;
