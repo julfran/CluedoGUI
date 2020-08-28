@@ -30,6 +30,24 @@ public class Cluedo extends GUI {
     	Cluedo game = new Cluedo();
     }
     
+    @Override
+	protected void redraw() {
+		// TODO Auto-generated method stub
+		
+	}
+    
+    @Override
+	protected void redraw(Graphics g) {
+		draw(g);
+	}
+    
+    @Override
+	protected void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		Image board = null; // Get the board image file 
+    	g.drawImage(board, 220, 220, this);
+	}
+    
     /**
      * Deal out the cards when starting the game
      * dealCards shuffles the whole card deck, pick out a
@@ -86,5 +104,7 @@ public class Cluedo extends GUI {
 
 
     }
+
+	
 
 }
