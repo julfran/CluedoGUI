@@ -50,8 +50,8 @@ public class Player {
 	/**
 	 * getCell returns the cell location of the player
 	 * */
-	public void getCell(Cell c){
-		currentLocation = c;
+	public Cell getCell(){
+		return currentLocation;
 	}
 
 	/**
