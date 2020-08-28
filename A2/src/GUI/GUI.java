@@ -1,5 +1,3 @@
-package GUI;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +14,8 @@ public abstract class GUI {
 	private JFrame frame;
 	private JPanel topLeftButtons;
 	private JTextArea bottomLeftTextArea;
-	private JPanel rightGraphicsPane;
+	//private GraphicsPane rightGraphicsPane;
+	private JComponent drawing;
 	
 	public GUI() {
 		initialise();
@@ -153,17 +152,16 @@ public abstract class GUI {
 	topLeftButtons.add(actionButtons,c2);
 	
 	//TEXT AREA
-	bottomLeftTextArea = new JTextArea(80, 80) ;
-	bottomLeftTextArea.setLineWrap(true) ;
-	bottomLeftTextArea.setWrapStyleWord( true); // pretty line wrap.
-	bottomLeftTextArea.setEditable(false );
-        
-	JScrollPane scroll   = new JScrollPane(bottomLeftTextArea );
-	bottomLeftTextArea.setPreferredSize(new Dimension(250, 250 ));
+	bottomLeftTextArea = new JTextArea(80, 80);
+	bottomLeftTextArea.setLineWrap(true);
+	bottomLeftTextArea.setWrapStyleWord(true); // pretty line wrap.
+	bottomLeftTextArea.setEditable(false);
+	JScrollPane scroll = new JScrollPane(bottomLeftTextArea);
+	bottomLeftTextArea.setPreferredSize(new Dimension(250, 250));
 	// these two lines make the JScrollPane always scroll to the bottom when
 	// text is appended to the JTextArea.
-	DefaultCaret caret =  ( DefaultCaret) bottomLeftTextArea.getCaret();
-	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE );
+	DefaultCaret caret = (DefaultCaret) bottomLeftTextArea.getCaret();
+	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
 	/*
 	 * finally, make the outer JFrame and put it all together. this is more
@@ -182,11 +180,33 @@ public abstract class GUI {
 	leftSplitPanes.setTopComponent(drawing);
 	leftSplitPanes.setBottomComponent(scroll);*/
 	//GRAPHICS PANE
-	rightGraphicsPane = new JPanel();
-	rightGraphicsPane.setBackground(new Color(255,255,255));
-	rightGraphicsPane.setBorder(border);
-	rightGraphicsPane.setSize(200, 200);
+	//rightGraphicsPane = new GraphicsPane();
+	//rightGraphicsPane.setBackground(new Color(255,255,255));
+	//rightGraphicsPane.setBorder(border);
+	//rightGraphicsPane.setSize(200, 200);
 	//JPanel win = new GridLayout(2,2);
+	
+	drawing = new JComponent() {
+		protected void paintComponent(Graphics g) {
+			redraw(g);
+		}
+	};
+	drawing.setPreferredSize(new Dimension(500,500));
+	// this prevents a bug where the component won't be
+	// drawn until it is resized.
+	drawing.setVisible(true);
+
+	drawing.addMouseListener(new MouseAdapter() {
+		public void mouseReleased(MouseEvent e) {
+			//onClick(e);
+			redraw();
+		}
+	});
+
+	drawing.addMouseWheelListener(new MouseAdapter() {
+		public void mouseWheelMoved(MouseWheelEvent e) {
+		}
+	});
 	
 	
 	//Set up the content pane.
@@ -201,7 +221,7 @@ public abstract class GUI {
 	JSplitPane LeftSplitPanes = new JSplitPane(JSplitPane.VERTICAL_SPLIT,topLeftButtons,bottomLeftTextArea);
 	//LeftSplitPanes.add(topLeftButtons,BorderLayout.NORTH);
 	//LeftSplitPanes.add(bottomLeftTextArea,BorderLayout.CENTER);
-	JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, LeftSplitPanes, rightGraphicsPane);
+	JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, LeftSplitPanes, drawing);
 	
     //frame.add(topLeftButtons,BorderLayout.NORTH);
     //frame.add(bottomLeftTextArea,BorderLayout.CENTER);
@@ -212,7 +232,22 @@ public abstract class GUI {
     frame.setMinimumSize(new Dimension(500,500));
     frame.setMaximumSize(new Dimension(500,500));
     frame.setVisible(true);
+    
+    //rightGraphicsPane.draw();
+    
 	  
   }
+
+	protected abstract void redraw();
+
+	protected void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void redraw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
   
 }
