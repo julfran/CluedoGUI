@@ -1,5 +1,7 @@
 package Cells;
 
+import CluedoGame.Player;
+
 public class MurderCell implements Cell {
     private int xPos;
     private int yPos;
@@ -10,14 +12,28 @@ public class MurderCell implements Cell {
     }
 
 
-    @Override
     public int getXPos() {
         return xPos;
     }
 
-    @Override
     public int getYPos() {
         return yPos;
     }
+
+
+	public void putPlayer(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public Player getPlayer() {
+		return null;
+	}
+
+
+	public boolean canTakePlayer() {
+		return false;
+	}
 
 }
