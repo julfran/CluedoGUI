@@ -94,13 +94,28 @@ public class Player {
 	public int getNumSteps(){
 		return numSteps;
 	}
+	
+	/**
+	 * Implements the accuse strategy where it checks if the accused
+	 * elements al match the murder set.
+	 * */
+	public boolean doAccusation(Board b, List<Player> players, WeaponType w, RoomType r, CharacterType c,
+								WeaponCard murderWeapon, RoomCard murderRoom, CharacterCard murderCharacter){
 
+		Player p = b.getCurrentPlayer(); //get current players
 
-
-	//method to check if move is possible
-
-	//------------
-	//SUGGESTION
+		//If player successfully guesses murder weapons right
+		if(murderCharacter.characters == c &&
+				murderWeapon.weapon == w && murderRoom.rooms == r){
+					return true;
+				}
+		//else game proceeds
+		//current player is elimenated
+		else {
+			p.eliminatePlayer();
+		}
+		return false;
+	}
 
 
 
