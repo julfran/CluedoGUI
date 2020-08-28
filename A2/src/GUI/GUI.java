@@ -1,3 +1,5 @@
+package GUI;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +11,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
-public abstract class GUI {
+public abstract class GUI extends Canvas {
 	
 	private JFrame frame;
 	private JPanel topLeftButtons;
