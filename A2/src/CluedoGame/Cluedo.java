@@ -146,6 +146,19 @@ public class Cluedo extends GUI {
             //boolean s =currentPlayer.doSuggestion(board,players,);
         }
     }
+	
+   /**
+     * Make two die variable that randomly generates
+     * numbers between 1-6 and add them together to get
+     * sum total
+     * @return dieSum
+     * */
+    public int rollDiceGenerator() {
+        int die1 = (int) (Math.random()*6) +1;
+        int die2 = (int) (Math.random()*6) +1;
+        int dieSum = die1 + die2;
+        return dieSum;
+    }
 
 	
 
