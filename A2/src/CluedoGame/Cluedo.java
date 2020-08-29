@@ -6,7 +6,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
+
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Cluedo extends GUI {
     private static boolean isGameOver;
@@ -44,8 +49,20 @@ public class Cluedo extends GUI {
     @Override
 	protected void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		Image board = null; // Get the board image file 
-    	g.drawImage(board, 220, 220, this);
+    	Image image = null;
+    	try {
+    		image = ImageIO.read(new File("C:\\Users\\jacobsscot\\eclipse-workspace\\images\\boardPic.png"));
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    	g.drawImage(image, 0, 0, this);
+    	for (Player p : players) {
+    		// Draw the players' tokens on the board
+    	}
+    	for (Room r : rooms) {
+    		// Draw the weapon and npc tokens in each room
+    	}
 	}
     
     /**
