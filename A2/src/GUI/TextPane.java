@@ -23,7 +23,7 @@ public class TextPane extends JPanel{
 		DefaultCaret caret = (DefaultCaret) textArea.getCaret(); //automatically scroll down when bar is full
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		add(scrollPane);					 //add text area to panel
-	    System.setOut(new PrintStream(textOutput));                  //set new output stream
+	        System.setOut(new PrintStream(textOutput));              //set new output stream
 	}
 	
 }
