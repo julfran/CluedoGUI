@@ -121,6 +121,31 @@ public class Cluedo extends GUI {
 
 
     }
+	
+	/**
+     * Get player's turn with their
+     * chosen state type
+     * @param state checks the type of state
+     * */
+    public void takeTurn(GUIStateType state){
+        if(state == GUIStateType.MOVE){
+
+        }
+        if(state == GUIStateType.ACCUSE){
+            boolean b =currentPlayer.doAccusation(board,accusedWeapon, accusedRoom, accusedCharacter,
+                    solutionWeapon, solutionRoom,solutionCharacter);
+            if(b == true){
+                isGameOver = true;
+            }
+            //remove player from the list of players on game
+            else{
+                players.remove(currentPlayer);
+            }
+        }
+        if(state == GUIStateType.SUGGEST){
+            //boolean s =currentPlayer.doSuggestion(board,players,);
+        }
+    }
 
 	
 
