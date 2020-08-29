@@ -16,14 +16,14 @@ public class TextPane extends JPanel{
 	
 	public TextPane() {
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(0, 534)); //text pane vertical size (horizontal is set by buttons)
+		setPreferredSize(new Dimension(0, 534));                 //text pane vertical size (horizontal is set by buttons)
 		textArea.setLineWrap(true);				 //shift text to next line if full
-		textArea.setWrapStyleWord(true); 		 //dont cut text in the middle of word during wrap
-		textArea.setEditable(false);			 //can't edit already printed text
+		textArea.setWrapStyleWord(true); 		         //dont cut text in the middle of word during wrap
+		textArea.setEditable(false);			         //can't edit already printed text
 		DefaultCaret caret = (DefaultCaret) textArea.getCaret(); //automatically scroll down when bar is full
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		add(scrollPane);							//add text area to panel
-	    System.setOut(new PrintStream(textOutput)); //set new output stream
+		add(scrollPane);					 //add text area to panel
+	    System.setOut(new PrintStream(textOutput));                  //set new output stream
 	}
 	
 }
