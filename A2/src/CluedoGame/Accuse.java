@@ -2,7 +2,7 @@ package CluedoGame;
 
 import Cards.*;
 
-import java.util.List;
+import java.util.*;
 
 public class Accuse {
     public RoomType accusedRoom;
@@ -19,26 +19,29 @@ public class Accuse {
     }
 
     /**
-     * Implements the accuse strategy
+     * Allows player to make an accusation based on character, weapon and room
      * */
     public boolean doAccusation(Board b, List<Player> players, WeaponType w, RoomType r, CharacterType c,
                                 WeaponCard murderWeapon, RoomCard murderRoom, CharacterCard murderCharacter){
 
-
-        /* Placeholder */
-//        //If player successfully guesses murder weapons right
-//        if(murderCharacter.characters != c && murderWeapon.getWeapon() != w && murderRoom.rooms != r){
-//                System.out.println("You have not found the murderer.");
-//                return false;
-//
-//        }
-
         //iterate through list of players and find one that matches player's accusation
-        //if iteration matches player input, check weapon type
+        //if iteration matches player input, check weapon type and room type
         //if all are true, print statement and then return true
+        //if accusation is wrong,
 
-        for(Player p: players){
-//            if(p.)
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).equals(murderCharacter)){
+                Player accusedPlayer = players.get(i);
+                Set<Card> accusedPlayerHand = accusedPlayer.getHand();
+                for(int j = 0; j < accusedPlayerHand.size(); j++){
+                    //check player's hand for room and weapon
+
+
+                }
+
+
+            }
+
         }
 
 
