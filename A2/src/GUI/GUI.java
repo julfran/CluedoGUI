@@ -185,11 +185,11 @@ public abstract class GUI {
 	JSplitPane LeftSplitPanes = new JSplitPane(JSplitPane.VERTICAL_SPLIT,topLeftButtons, new TextPane()); //Split left pane into buttons and text area
 	JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, LeftSplitPanes, rightGraphicsPane); //split left pane from right graphics area
 	frame.add(mainPane,BorderLayout.NORTH);
-    frame.pack();
-    frame.setSize(new Dimension(870,660));
-    frame.setVisible(true);
+    	frame.pack();
+   	frame.setSize(new Dimension(870,660));
+   	frame.setVisible(true);
 	  
-    }
+   	}
 	
 	//-----------------------------------------------
 		//Opening Frame- setup panel
