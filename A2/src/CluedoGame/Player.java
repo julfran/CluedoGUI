@@ -24,7 +24,7 @@ public class Player {
 	 * @param c- players chosen character type
 	 * @param name- players name input for that character
 	 * */
-	public Player(CharacterType c, String name, GUIStateType state){
+	public Player(CharacterType c, String name){
 		this.myCharacterType = c;
 		this.playerName = name;
 		isEliminated = false;
@@ -116,14 +116,43 @@ public class Player {
 		}
 		return false;
 	}
+	
+	/**
+	 * Implement the suggest strategy where it get currentPlayer's
+	 * Room type and record the suggestion set.
+	 * */
+	public boolean doSuggestion(Board b, ArrayList <Player> playerList, RoomType suggestedRoom,
+								CharacterType suggestedCharacter, WeaponType suggestedWeapon){
+		Player p = b.getCurrentPlayer();
+
+		//players suggests room they've entered, choose a weapon they want to suggest and who did it
+		suggestedCharacter = p.getCharacterType();
+		suggestedRoom = p.getRoomType();
+		//suggestedWeapon 			//this one later when gui happens??
+
+		//Check if player has the right Roomcell location then set to suggestedRoom
+		for(Player player: playerList){
+			if(player.getCharacterType() == suggestedCharacter &&
+					player.getCellLocation() instanceof RoomCell){
+					Cell temp = player.getCellLocation();
+					if(temp.equals(getRoomType())){
+						suggestedRoom = (RoomType) temp;
+					}
+			}
+		}
+
+		//Check if any players want to refute
+		//Ask all other players if they want to refute the suggestion
+
+		return false;
+
+	}
 
 
 
 
 
-	//------------
-	//REFUTE
-
+	
 
 //	private CharacterType playersCharacter;
 //    private RoomType room;
