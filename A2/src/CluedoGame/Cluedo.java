@@ -21,13 +21,50 @@ public class Cluedo extends GUI {
     private boolean gameWon = false;
     private ArrayList<Player> players;
     private ArrayList<Card> solutionSet = new ArrayList<>();
-
+	public final int CELL_WIDTH = 36;
+	public final int CELL_HEIGHT = 30;
+	
+	// Image files
+	private Image background;
+	// Characters:
+	private Image tokenScarlett;
+	private Image tokenMustard;
+	private Image tokenWhite;
+	private Image tokenGreen;
+	private Image tokenPeacock;
+	private Image tokenPlum;
+	// Weapons:
+	private Image tokenCandle;
+	private Image tokenDagger;
+	private Image tokenPipe;
+	private Image tokenRevolver;
+	private Image tokenRope;
+	private Image tokenSpanner;
+	
     RoomCard solutionRoom;
     WeaponCard solutionWeapon;
     CharacterCard solutionCharacter;
 
     public Cluedo() {
-    	players = new ArrayList<Player>();
+    	// Load the images
+    	try {
+    		background = ImageIO.read(new File("assets/boardPic.png"));
+    		tokenScarlett = ImageIO.read(new File("assets/tokenScarlett.png"));
+    		tokenMustard = ImageIO.read(new File("assets/tokenMustard.png"));
+    		tokenWhite = ImageIO.read(new File("assets/tokenWhite.png"));
+    		tokenGreen = ImageIO.read(new File("assets/tokenGreen.png"));
+    		tokenPeacock = ImageIO.read(new File("assets/tokenPeacock.png"));
+    		tokenPlum = ImageIO.read(new File("assets/tokenPlum.png"));
+    		tokenCandle = ImageIO.read(new File("assets/tokenCandle.png"));
+    		tokenDagger = ImageIO.read(new File("assets/tokenDagger.png"));
+    		tokenPipe = ImageIO.read(new File("assets/tokenPipe.png"));
+    		tokenRevolver = ImageIO.read(new File("assets/tokenRevolver.png"));
+    		tokenRope = ImageIO.read(new File("assets/tokenRope.png"));
+    		tokenSpanner = ImageIO.read(new File("assets/tokenSpanner.png"));
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
     	Board board = new Board(players);
     }
     
@@ -48,21 +85,34 @@ public class Cluedo extends GUI {
     
     @Override
 	protected void draw(Graphics g) {
-		// TODO Auto-generated method stub
-    	Image image = null;
-    	try {
-    		image = ImageIO.read(new File("C:\\Users\\jacobsscot\\eclipse-workspace\\images\\boardPic.png"));
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
+    	g.drawImage(background, 0,0,580,605,null);
+    	// Draw the players:
+    	if (players != null) {
+    		for (Player p : players) {
+        		if (p.getCharacterType() == CharacterType.MISSSCARLETT) {
+        			g.drawImage(tokenScarlett, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        		if (p.getCharacterType() == CharacterType.COLONELMUSTARD) {
+        			g.drawImage(tokenMustard, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        		if (p.getCharacterType() == CharacterType.MRSWHITE) {
+        			g.drawImage(tokenWhite, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        		if (p.getCharacterType() == CharacterType.MRGREEN) {
+        			g.drawImage(tokenGreen, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        		if (p.getCharacterType() == CharacterType.MRSPEACOCK) {
+        			g.drawImage(tokenPeacock, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        		if (p.getCharacterType() == CharacterType.PROFESSORPLUM) {
+        			g.drawImage(tokenPlum, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        		}
+        	}
     	}
-    	g.drawImage(image, 0, 0, this);
-    	for (Player p : players) {
-    		// Draw the players' tokens on the board
-    	}
-    	for (Room r : rooms) {
+    	
+    	//for (Room r : rooms) {
     		// Draw the weapon and npc tokens in each room
-    	}
+    	//}
 	}
     
     /**
@@ -120,44 +170,6 @@ public class Cluedo extends GUI {
         }
 
 
-    }
-	
-	/**
-     * Get player's turn with their
-     * chosen state type
-     * @param state checks the type of state
-     * */
-    public void takeTurn(GUIStateType state){
-        if(state == GUIStateType.MOVE){
-
-        }
-        if(state == GUIStateType.ACCUSE){
-            boolean b =currentPlayer.doAccusation(board,accusedWeapon, accusedRoom, accusedCharacter,
-                    solutionWeapon, solutionRoom,solutionCharacter);
-            if(b == true){
-                isGameOver = true;
-            }
-            //remove player from the list of players on game
-            else{
-                players.remove(currentPlayer);
-            }
-        }
-        if(state == GUIStateType.SUGGEST){
-            //boolean s =currentPlayer.doSuggestion(board,players,);
-        }
-    }
-	
-   /**
-     * Make two die variable that randomly generates
-     * numbers between 1-6 and add them together to get
-     * sum total
-     * @return dieSum
-     * */
-    public int rollDiceGenerator() {
-        int die1 = (int) (Math.random()*6) +1;
-        int die2 = (int) (Math.random()*6) +1;
-        int dieSum = die1 + die2;
-        return dieSum;
     }
 
 	
