@@ -10,6 +10,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,6 +19,11 @@ public class Cluedo extends GUI {
 	// Cell Details
 	public final int CELL_WIDTH = 27;
 	public final int CELL_HEIGHT = 27;
+	
+	// Movement fields
+	private boolean waitingForClick = false;
+	private Player movingPlayer;
+	private int roll;
 	
     private static boolean isGameOver;
     public int numOfSteps;
@@ -177,9 +183,24 @@ public class Cluedo extends GUI {
 	 * Function called on mouse click in graphics pane
 	 * 
 	 **/
-    	@Override
 	protected void onClick(MouseEvent e) {
-		
+		if (waitingForClick) {
+			int x = e.getX();
+			int y = e.getY();
+			x = x / CELL_WIDTH;
+			y = y / CELL_HEIGHT;
+			if (x >= 0 && x <= 21 && y >= 0 && y <= 21) {
+				if (board.checkPath(movingPlayer, new Coord(x, y), roll)) {
+					if (board.movePlayer(movingPlayer, board.getCell(x, y))) {
+						waitingForClick = false;
+					} else {
+						System.out.println("Unknown error occured. Failed to move.");
+					}
+				} else {
+					System.out.println("Failed to find valid path to given point.");
+				}
+			}
+		}
 	}
 	
     /**
