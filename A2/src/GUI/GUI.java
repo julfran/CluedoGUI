@@ -326,7 +326,12 @@ public abstract class GUI {
 					players.add(new Player(CharacterType.MRGREEN, username));
 				}
 
-				if(players.size() >6 || players.size() == 0){
+				if(players.size() >=3){
+					startGame.setEnabled(true);
+				}
+				if(players.size() >6 ){
+					JOptionPane.showMessageDialog(startGame, "THERE'S TOO MANY PLAYERS! Please enter" +
+							" at least 3-6 players");
 					startGame.setEnabled(false);
 				}
 				else{
