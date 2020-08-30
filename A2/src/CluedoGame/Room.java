@@ -21,6 +21,10 @@ public class Room {
 		npcs = new ArrayList<CharacterType>();
 	}
 	
+	public void addPlayer(Player p) {
+		players.add(p);
+	}
+	
 	// Returns true if the room contains the given weapon
 	public boolean contains(WeaponType w) {
 		if (weapons.contains(w)) {
