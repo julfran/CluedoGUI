@@ -105,107 +105,55 @@ public class Player {
 
 
 
-	//method to check if move is possible
+	/**
+	 * Implements the accuse strategy where it checks if the accused
+	 * elements al match the murder set.
+	 * */
+	public boolean doAccusation(Board b, WeaponType w, RoomType r, CharacterType c,
+								WeaponCard murderWeapon, RoomCard murderRoom, CharacterCard murderCharacter){
 
-	//------------
-	//SUGGESTION
+		Player p = b.getCurrentPlayer();
 
+		//If player successfully guesses murder weapons right
+		if(murderCharacter.characters == c &&
+				murderWeapon.weapon == w && murderRoom.rooms == r){
+					return true;
+				}
+		//else game proceeds
+		//current player is eliminated
+		else {
+			p.eliminatePlayer();
+		}
+		return false;
+	}
 
+	/**
+	 * Implement the suggest strategy where it get currentPlayer's
+	 * Room type and record the suggestion set.
+	 * */
+	public boolean doSuggestion(Board b, ArrayList <Player> playerList, RoomType suggestedRoom,
+								CharacterType suggestedCharacter, WeaponType suggestedWeapon){
+		Player p = b.getCurrentPlayer();
 
+		//players suggests room they've entered, choose a weapon they want to suggest and who did it
+		suggestedCharacter = p.getCharacterType();
+		suggestedRoom = p.getRoomType();
+		//suggestedWeapon 			//this one later when gui happens??
 
+		//Check if player has the right Roomcell location then set to suggestedRoom
+		for(Player player: playerList){
+			if(player.getCharacterType() == suggestedCharacter &&
+					player.getCellLocation() instanceof RoomCell){
+					Cell temp = player.getCellLocation();
+					if(temp.equals(getRoomType())){
+						suggestedRoom = (RoomType) temp;
+					}
+			}
+		}
 
-	//------------
-	//REFUTE
+		//Check if any players want to refute
+		//Ask all other players if they want to refute the suggestion
 
+		return false;
 
-//	private CharacterType playersCharacter;
-//    private RoomType room;
-//    private boolean isStillPlaying;
-//    private ArrayList <Card> hand = new ArrayList<>();
-//    private Cell cell;
-//	int x = 0;
-//	int y = 0;
-//
-//
-//
-//    /* Constructor for the Player object */
-//    public Player(CharacterType character){
-//        this.playersCharacter = character;
-//        isStillPlaying = true;
-//    }
-//
-//    /* Helper methods */
-//
-//    public void addToHand(Card c) {
-//    	hand.add(c);
-//    }
-//
-//    public int getX() {
-//    	return x;
-//  	}
-//
-//  	public int getY() {
-//  		return y;
-//  	}
-//
-//  	public void getCell(Cell c) {
-//    	cell = c;
-//  	}
-//
-//  	public RoomType getRoom() {
-//  		return room;
-//  	}
-//
-//	public void move(Cell c) {
-//    	if (c.getClass() == RoomCell.class) {
-//    		room = ((RoomCell) c).getType();
-//    	} else {
-//    		room = null;
-//    	}
-//    	cell = c;
-//    }
-//
-//    public CharacterType getName(){
-//        return this.playersCharacter;
-//    }
-//
-//    public ArrayList<Card> getHand() {
-//    	return hand;
-//    }
-//
-//     public String toString() {
-//    	if (playersCharacter == CharacterType.COLONELMUSTARD) {
-//    		return "Colonel Mustard";
-//    	}
-//    	if (playersCharacter == CharacterType.MISSSCARLETT) {
-//    		return "Miss Scarlet";
-//    	}
-//    	if (playersCharacter == CharacterType.MRSWHITE) {
-//    		return "Mrs White";
-//    	}
-//    	if (playersCharacter == CharacterType.MRGREEN) {
-//    		return "Mr Green";
-//    	}
-//    	if (playersCharacter == CharacterType.MRSPEACOCK) {
-//    		return "Mrs Peacock";
-//    	}
-//    	if (playersCharacter == CharacterType.PROFESSORPLUM) {
-//    		return "Professor Plum";
-//    	}
-//    	return "[Player name not found]";
-//    }
-//    //Not needed but will remain just in case
-//
-//    /**
-//     * Used for removing a player from the game loop when an accusation is incorrect
-//     * @param isStillPlaying
-//     */
-//    public void isStillPlaying(boolean isStillPlaying){
-//    	this.isStillPlaying = isStillPlaying;
-//    }
-//
-//    public boolean getIsStillPlaying(){
-//    	return this.isStillPlaying;
-//    }
-
-}
+	}
