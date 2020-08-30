@@ -231,6 +231,11 @@ public class Board {
 		return Collections.unmodifiableList(roomDoor.get(room));
 	}
 
+	public boolean checkPath(Player movingPlayer, Coord coord, int roll) {
+		Cell target = cell[coord.x()][coord.y()];
+		return false;
+	}
+
 
 
 	//
