@@ -19,6 +19,11 @@ public abstract class GUI {
 	//private JComponent drawing;
 	private JComponent rightGraphicsPane;
 	
+	private JTextField textField;
+	private JFrame openingFrame;
+	private JPanel opening;		//for adding of players
+	public ArrayList<Player> players = new ArrayList<Player>();
+	
 	public GUI() {
 		initialise();
 	}
