@@ -21,8 +21,8 @@ public class Cluedo extends GUI {
     private boolean gameWon = false;
     private ArrayList<Player> players;
     private ArrayList<Card> solutionSet = new ArrayList<>();
-	public final int CELL_WIDTH = 36;
-	public final int CELL_HEIGHT = 30;
+	public final int CELL_WIDTH = 27;
+	public final int CELL_HEIGHT = 27;
 	
 	// Image files
 	private Image background;
