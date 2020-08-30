@@ -172,7 +172,16 @@ public class Cluedo extends GUI {
         	}
     	}	
 	}
-    
+	
+	/**
+	 * Function called on mouse click in graphics pane
+	 * 
+	 **/
+    	@Override
+	protected void onClick(MouseEvent e) {
+		
+	}
+	
     /**
      * Deal out the cards when starting the game
      * dealCards shuffles the whole card deck, pick out a
