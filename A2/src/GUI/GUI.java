@@ -335,6 +335,24 @@ public abstract class GUI {
 				frame.getRootPane().requestFocus();
 			}
 		});
+		
+		//-------------------------------------------------
+		//Jmenu panel (at top of the window)
+		JMenuBar menu = new JMenuBar();
+		frame.setJMenuBar(menu);
+		JMenu options = new JMenu("Options");
+		menu.add(options);
+
+
+		//Quit option
+		JMenuItem quitOption = new JMenuItem("Quit");
+		quitOption.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				quit();
+			}
+		});
+		options.add(quitOption);
 	}
 	
 
@@ -350,6 +368,20 @@ public abstract class GUI {
 	protected void redraw(Graphics g) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Asks users if they want to quit when press quit option
+	 * */
+	public void quit(){
+		int reply = JOptionPane.showConfirmDialog(frame,"Would you like to quit?",
+				"Quit Game", JOptionPane.YES_NO_OPTION);
+		if(reply == JOptionPane.YES_OPTION){
+			System.exit(0);
+		}
+		else{
+			frame.getRootPane().requestFocus();
+		}
 	}
   
 }
