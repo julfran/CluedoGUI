@@ -21,7 +21,7 @@ public class Player {
 	private boolean isEliminated = false;
 	private boolean isPlaying = false;
 	private int numSteps;
-
+	private Room room;
 
 	/**Constructor
 	 * @param c- players chosen character type
@@ -34,6 +34,21 @@ public class Player {
 		myCardList = new ArrayList<Card>();
 	}
 
+	public void putInRoom(Room r) {
+		room = r;
+	}
+	
+	public void takeOutOfRoom() {
+		room = null;
+	}
+	
+	public RoomType getRoomType() {
+		if (room != null) {
+			return room.getType();
+		}
+		return null;
+	}
+	
 	/**
 	 * getCharacterType returns the player's type of the character
 	 * @return myCharacterType
@@ -150,10 +165,10 @@ public class Player {
 		//Check if player has the right Roomcell location then set to suggestedRoom
 		for(Player player: playerList){
 			if(player.getCharacterType() == suggestedCharacter &&
-					player.getCellLocation() instanceof RoomCell){
-					Cell temp = player.getCellLocation();
-					if(temp.equals(getRoomType())){
-						suggestedRoom = (RoomType) temp;
+					player.getCell() instanceof RoomCell){
+					Cell temp = player.getCell();
+					if(temp.getClass() == RoomCell.class){
+						suggestedRoom = ((Room) temp).getType();
 					}
 			}
 		}
@@ -164,3 +179,4 @@ public class Player {
 		return false;
 
 	}
+}
