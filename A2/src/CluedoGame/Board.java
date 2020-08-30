@@ -163,17 +163,32 @@ public class Board {
 	// Returns true if the player moved
 	// False if they didn't
 	public boolean movePlayer(Player p, Cell c) {
+		// TODO: Need to remove player from last location
 		if (c.canTakePlayer()) {
 			if (p.getCell() != null) {
 				if (p.getCell().getClass() == RoomCell.class) {
-					// TODO: Remove the player from that room and cell
+					for (Room r : rooms) {
+						if (r.type == ((RoomCell) c).getRoomType()) {
+							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
+							p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
+							r.addPlayer(p);
+						}
+					}
+				}
+				if (p.getCell().getClass() == DoorCell.class) {
+					for (Room r : rooms) {
+						if (r.type == ((DoorCell) c).getRoomDoor()) {
+							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
+							p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
+							r.addPlayer(p);
+						}
+					}
 				}
 				if (p.getCell().getClass() == HallwayCell.class) {
-					// TODO: Remove the player from that cell
+					c.putPlayer(p);
+					p.setCell(c);
 				}
 			}
-			// TODO: Make this work with rooms
-			c.putPlayer(p);
 			return true;
 		} else {
 			return false;
