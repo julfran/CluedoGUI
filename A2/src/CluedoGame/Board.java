@@ -12,19 +12,30 @@ public class Board {
 	public static int BOARD_HEIGHT;
 	private Cell[][] cell = new Cell[22][22];
 	private int numOfPlayers ;
-	private ArrayList <Player> defaultPlayers;
-	private HashMap <CharacterType, Player> currentPlayers = new HashMap<>();
-	private HashMap<RoomType, RoomCell> initCells= new HashMap<>();
-	private HashMap<RoomType, List<DoorCell>> roomDoor = new HashMap<>();
+	private ArrayList <Player> players;
+	private HashMap <CharacterType, Player> currentPlayers = new HashMap<CharacterType, Player>();
+	private HashMap<RoomType, RoomCell> initCells= new HashMap<RoomType, RoomCell>();
+	private HashMap<RoomType, List<DoorCell>> roomDoor = new HashMap<RoomType, List<DoorCell>>();
 	private CharacterType currentPlayer;
+	private ArrayList<Room> rooms;
+	
+	
 
+	public Board(ArrayList<Player> players){
 
-	public Board(ArrayList<Player> p){
-
-		defaultPlayers = p;
-		int x= 0;
-		int y =0;
-
+		this.players = players;
+		
+		this.rooms = new ArrayList<Room>();
+		this.rooms.add(new Room(RoomType.BALLROOM));
+		this.rooms.add(new Room(RoomType.CONSERVATORY));
+		this.rooms.add(new Room(RoomType.BILLIARDROOM));
+		this.rooms.add(new Room(RoomType.LIBRARY));
+		this.rooms.add(new Room(RoomType.STUDY));
+		this.rooms.add(new Room(RoomType.HALL));
+		this.rooms.add(new Room(RoomType.LOUNGE));
+		this.rooms.add(new Room(RoomType.DININGROOM));
+		this.rooms.add(new Room(RoomType.KITCHEN));
+		
 		String initialCellBoard =
 					"KKKKKK...WAAA....CCCCC\n" +
 					"KKKKKK..AAAAAAA..CCCCC\n"+
@@ -49,97 +60,132 @@ public class Board {
 					"OOOOOOO..HHHHHH.SSSSSS\n"+
 					"OOOOOOO.RHHHHHH.SSSSSS\n";
 
-
-		for(char s: initialCellBoard.toCharArray()){
-			//DoorCell
-			if(s == '+'){
-				cell[y][x] = new DoorCell(x,y);
+		int x = 0;
+		int y = 0;
+		for (char c : initialCellBoard.toCharArray()) {
+			// Newline
+			if (c== '\n') {
+				x = 0;
+				y ++;
+			} else {
+				// DoorCell
+				if(c == '+'){
+					cell[x][y] = new DoorCell(x,y);
+				}
+				//HallwayCell
+				else if(c == '.'){
+					cell[x][y] = new HallwayCell(x,y);
+				}
+				// Hallway variants (player start locations)
+				else if(c == 'W'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.MRSWHITE) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				else if(c == 'G'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.MRGREEN) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				else if(c == 'M'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.COLONELMUSTARD) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				else if(c == 'R'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.MISSSCARLETT) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				else if(c == 'P'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.PROFESSORPLUM) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				else if(c == 'E'){
+					cell[x][y] = new HallwayCell(x,y);
+					for (Player p : players) {
+						if (p.getCharacterType() == CharacterType.MRSPEACOCK) {
+							movePlayer(p, cell[x][y]);
+						}
+					}
+				}
+				//MidCell/MurderCell
+				else if(c == '|'){
+					cell[x][y] = new MurderCell(x,y);
+				}
+				// Various rooms
+				else if(c == 'K'){
+					cell[x][y] = new RoomCell(x,y,RoomType.KITCHEN);
+				}
+				else if(c == 'A'){
+					cell[x][y] = new RoomCell(x,y,RoomType.CONSERVATORY);
+				}
+				else if(c == 'D'){
+					cell[x][y] = new RoomCell(x,y,RoomType.DININGROOM);
+				}
+				else if(c == 'B'){
+					cell[x][y] = new RoomCell(x,y,RoomType.BILLIARDROOM);
+				}
+				else if(c == 'L'){
+					cell[x][y] = new RoomCell(x,y,RoomType.LIBRARY);
+				}
+				else if(c == 'O'){
+					cell[x][y] = new RoomCell(x,y,RoomType.LOUNGE);
+				}
+				else if(c == 'H'){
+					cell[x][y] = new RoomCell(x,y,RoomType.HALL);
+				}
+				else if(c == 'S'){
+					cell[x][y] = new RoomCell(x,y,RoomType.STUDY);
+				}
+				x ++;
 			}
-			//HallwayCell
-			else if(s == '.'){
-				cell[y][x] = new HallwayCell(x,y);
-			}
-			//MidCell/MurderCell
-			else if(s == '|'){
-				cell[y][x] = new MurderCell(x,y);
-			}
-			else if(x == cell[0].length){
-				x=0;
-				y++;
-			}
-			//RoomCell where the players will stand when they enter the room
-			else{
-				if(s == 'K'){
-					cell[y][x] = new RoomCell(x,y,RoomType.KITCHEN);
-					initCells.put(RoomType.KITCHEN, (RoomCell)cell[5][0]);
-				}
-				else if(s == 'A'){
-					cell[y][x] = new RoomCell(x,y,RoomType.CONSERVATORY);
-					initCells.put(RoomType.CONSERVATORY, (RoomCell)cell[4][18]);
-				}
-				else if(s == 'D'){
-					cell[y][x] = new RoomCell(x,y,RoomType.DININGROOM);
-					initCells.put(RoomType.DININGROOM, (RoomCell)cell[14][1]);
-				}
-				else if(s == 'B'){
-					cell[y][x] = new RoomCell(x,y,RoomType.BILLIARDROOM);
-					initCells.put(RoomType.BILLIARDROOM, (RoomCell)cell[11][18]);
-				}
-				else if(s == 'L'){
-					cell[y][x] = new RoomCell(x,y,RoomType.LIBRARY);
-					initCells.put(RoomType.LIBRARY, (RoomCell)cell[16][18]);
-				}
-				else if(s == 'O'){
-					cell[y][x] = new RoomCell(x,y,RoomType.LOUNGE);
-					initCells.put(RoomType.LOUNGE, (RoomCell)cell[22][1]);
-				}
-				else if(s == 'H'){
-					cell[y][x] = new RoomCell(x,y,RoomType.HALL);
-					initCells.put(RoomType.HALL, (RoomCell)cell[20][9]);
-				}
-				else if(s == 'S'){
-					cell[y][x] = new RoomCell(x,y,RoomType.STUDY);
-					initCells.put(RoomType.STUDY, (RoomCell)cell[23][18]);
-				}
-				x++;
-			}
-			setPlayerPos();
 		}
-
 	}
 
-	/**
-	 * Set Players Initial positions when game starts
-	 * */
-	private void setPlayerPos(){
-		for(Player p: players){
-			if(p.getCharacterType().equals(CharacterType.COLONELMUSTARD)){
-				((HallwayCell)cell[0][6]).putPlayer(p);
-				p.getCell(cell[0][6]);
+	// Removes player from previous position and moves them to a new one
+	// Returns true if the player moved
+	// False if they didn't
+	public boolean movePlayer(Player p, Cell c) {
+		if (c.canTakePlayer()) {
+			if (p.getCell() != null) {
+				if (p.getCell().getClass() == RoomCell.class) {
+					// TODO: Remove the player from that room and cell
+				}
+				if (p.getCell().getClass() == HallwayCell.class) {
+					// TODO: Remove the player from that cell
+				}
 			}
-			else if(p.getCharacterType().equals(CharacterType.MRSPEACOCK)){
-				((HallwayCell)cell[22][5]).putPlayer(p);
-				p.getCell(cell[22][5]);
-			}
-			else if(p.getCharacterType().equals(CharacterType.MISSSCARLETT)){
-				((HallwayCell)cell[0][15]).putPlayer(p);
-				p.getCell(cell[0][15]);
-			}
-			else if(p.getCharacterType().equals(CharacterType.MRSWHITE)){
-				((HallwayCell)cell[9][22]).putPlayer(p);
-				p.getCell(cell[9][22]);
-			}
-			else if(p.getCharacterType().equals(CharacterType.MRGREEN)){
-				((HallwayCell)cell[22][19]).putPlayer(p);
-				p.getCell(cell[22][19]);
-			}
-			else if(p.getCharacterType().equals(CharacterType.PROFESSORPLUM)){
-				((HallwayCell)cell[10][0]).putPlayer(p);
-				p.getCell(cell[10][0]);
-			}
+			// TODO: Make this work with rooms
+			c.putPlayer(p);
+			return true;
+		} else {
+			return false;
 		}
+		
 	}
-
+	
+	
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+	
 	/**
 	 * Get player that currently has its turn
 	 * */
@@ -148,7 +194,7 @@ public class Board {
 	}
 
 	/**
-	 * Get any cell in a bord with given
+	 * Get any cell in a board with given
 	 * x and y coordinates
 	 * */
 	public Cell getCell(int xPos, int yPos){
