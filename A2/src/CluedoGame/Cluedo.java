@@ -14,6 +14,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Cluedo extends GUI {
+
+	// Cell Details
+	public final int CELL_WIDTH = 27;
+	public final int CELL_HEIGHT = 27;
+	
     private static boolean isGameOver;
     public int numOfSteps;
     private static Board board;
@@ -21,9 +26,9 @@ public class Cluedo extends GUI {
     private boolean gameWon = false;
     private ArrayList<Player> players;
     private ArrayList<Card> solutionSet = new ArrayList<>();
-	public final int CELL_WIDTH = 27;
-	public final int CELL_HEIGHT = 27;
-	
+	private ArrayList<CharacterType> npcs; // The characters that aren't being played
+	private ArrayList<WeaponType> weapons;
+    
 	// Image files
 	private Image background;
 	// Characters:
@@ -90,29 +95,82 @@ public class Cluedo extends GUI {
     	if (players != null) {
     		for (Player p : players) {
         		if (p.getCharacterType() == CharacterType.MISSSCARLETT) {
-        			g.drawImage(tokenScarlett, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenScarlett, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         		if (p.getCharacterType() == CharacterType.COLONELMUSTARD) {
-        			g.drawImage(tokenMustard, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenMustard, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         		if (p.getCharacterType() == CharacterType.MRSWHITE) {
-        			g.drawImage(tokenWhite, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenWhite, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         		if (p.getCharacterType() == CharacterType.MRGREEN) {
-        			g.drawImage(tokenGreen, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenGreen, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         		if (p.getCharacterType() == CharacterType.MRSPEACOCK) {
-        			g.drawImage(tokenPeacock, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenPeacock, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         		if (p.getCharacterType() == CharacterType.PROFESSORPLUM) {
-        			g.drawImage(tokenPlum, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, 36, 30, null);
+        			g.drawImage(tokenPlum, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
         		}
         	}
     	}
-    	
-    	//for (Room r : rooms) {
-    		// Draw the weapon and npc tokens in each room
-    	//}
+    	if (board != null) {
+    		for (Room r : board.getRooms()) {
+        		// Draw the weapon and npc tokens in each room
+        		for (WeaponType w : weapons) {
+        			if (r.contains(w)) {
+        				switch (w) {
+    					case CANDLESTICK:
+    						g.drawImage(tokenCandle, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case DAGGER:
+    						g.drawImage(tokenDagger, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case LEADPIPE:
+    						g.drawImage(tokenPipe, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case REVOLVER:
+    						g.drawImage(tokenRevolver, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case ROPE:
+    						g.drawImage(tokenRope, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case SPANNER:
+    						g.drawImage(tokenSpanner, r.getWeaponCell(w).x()*CELL_WIDTH, r.getWeaponCell(w).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					default:
+    						break;
+    					}
+        			}
+        		}
+        		for (CharacterType c : npcs) {
+        			if (r.contains(c)) {
+        				switch (c) {
+    					case COLONELMUSTARD:
+    						g.drawImage(tokenMustard, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case MISSSCARLETT:
+    						g.drawImage(tokenScarlett, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case MRGREEN:
+    						g.drawImage(tokenGreen, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case MRSPEACOCK:
+    						g.drawImage(tokenPeacock, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case MRSWHITE:
+    						g.drawImage(tokenWhite, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					case PROFESSORPLUM:
+    						g.drawImage(tokenPlum, r.getCharacterCell(c).x()*CELL_WIDTH, r.getCharacterCell(c).y()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
+    						break;
+    					default:
+    						break;
+    					}
+        			}
+        		}
+        	}
+    	}	
 	}
     
     /**
