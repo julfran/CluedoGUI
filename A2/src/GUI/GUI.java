@@ -46,6 +46,7 @@ public abstract class GUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			// call options pane to choose players and start game
 			
 		}
 	    
@@ -70,6 +71,7 @@ public abstract class GUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			// call suggest method
 			
 		}
 	    
@@ -82,6 +84,7 @@ public abstract class GUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			// call accuse method
 			
 		}
 	    
