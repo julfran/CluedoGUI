@@ -166,6 +166,7 @@ public abstract class GUI {
 	//GRAPHICS AREA
 	//---------------------------------------------------------------------------------
 	
+	//create graphics pane
 	rightGraphicsPane = new JComponent() {
 		protected void paintComponent(Graphics g) {
 			redraw(g);
@@ -173,6 +174,14 @@ public abstract class GUI {
 	};
 	rightGraphicsPane.setPreferredSize(new Dimension(500,500));
 	rightGraphicsPane.setVisible(true);
+	
+	//mouse listener on graphics pane	
+	drawing.addMouseListener(new MouseAdapter() {
+		public void mouseReleased(MouseEvent e) {
+			onClick(e); //call the function to handle mouse actions on click
+			redraw();   //redraw whole board with changes that mouse click has done
+		}
+	});
 
 	//---------------------------------------------------------------------------------
 	//FRAME
