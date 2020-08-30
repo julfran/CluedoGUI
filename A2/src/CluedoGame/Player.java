@@ -46,6 +46,10 @@ public class Player {
 	public String getPlayerName(){
 		return playerName;
 	}
+	
+	public void setCell(Cell cell) {
+		currentLocation = cell;
+	}
 
 	/**
 	 * getCell returns the cell location of the player
