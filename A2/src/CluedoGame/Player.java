@@ -53,6 +53,14 @@ public class Player {
 	public Cell getCell(){
 		return currentLocation;
 	}
+	
+	public int getX() {
+		return currentLocation.getXPos();
+	}
+	
+	public int getY() {
+		return currentLocation.getYPos();
+	}
 
 	/**
 	 * @return Set the player to isEliminated equal to true
@@ -94,65 +102,21 @@ public class Player {
 	public int getNumSteps(){
 		return numSteps;
 	}
-	
-	/**
-	 * Implements the accuse strategy where it checks if the accused
-	 * elements al match the murder set.
-	 * */
-	public boolean doAccusation(Board b, List<Player> players, WeaponType w, RoomType r, CharacterType c,
-								WeaponCard murderWeapon, RoomCard murderRoom, CharacterCard murderCharacter){
 
-		Player p = b.getCurrentPlayer(); //get current players
 
-		//If player successfully guesses murder weapons right
-		if(murderCharacter.characters == c &&
-				murderWeapon.weapon == w && murderRoom.rooms == r){
-					return true;
-				}
-		//else game proceeds
-		//current player is elimenated
-		else {
-			p.eliminatePlayer();
-		}
-		return false;
-	}
-	
-	/**
-	 * Implement the suggest strategy where it get currentPlayer's
-	 * Room type and record the suggestion set.
-	 * */
-	public boolean doSuggestion(Board b, ArrayList <Player> playerList, RoomType suggestedRoom,
-								CharacterType suggestedCharacter, WeaponType suggestedWeapon){
-		Player p = b.getCurrentPlayer();
 
-		//players suggests room they've entered, choose a weapon they want to suggest and who did it
-		suggestedCharacter = p.getCharacterType();
-		suggestedRoom = p.getRoomType();
-		//suggestedWeapon 			//this one later when gui happens??
+	//method to check if move is possible
 
-		//Check if player has the right Roomcell location then set to suggestedRoom
-		for(Player player: playerList){
-			if(player.getCharacterType() == suggestedCharacter &&
-					player.getCellLocation() instanceof RoomCell){
-					Cell temp = player.getCellLocation();
-					if(temp.equals(getRoomType())){
-						suggestedRoom = (RoomType) temp;
-					}
-			}
-		}
-
-		//Check if any players want to refute
-		//Ask all other players if they want to refute the suggestion
-
-		return false;
-
-	}
+	//------------
+	//SUGGESTION
 
 
 
 
 
-	
+	//------------
+	//REFUTE
+
 
 //	private CharacterType playersCharacter;
 //    private RoomType room;
