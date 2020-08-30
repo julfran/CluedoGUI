@@ -6,16 +6,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
+import CluedoGame.*;
+import Cells.*;
+import Cards.*;
+
 public abstract class GUI {
 	
 	private JFrame frame;
 	private JPanel topLeftButtons;
-	//private GraphicsPane rightGraphicsPane;
 	//private JComponent drawing;
 	private JComponent rightGraphicsPane;
 	
@@ -198,7 +202,6 @@ public abstract class GUI {
    	frame.setSize(new Dimension(870,660));
    	frame.setVisible(true);
 	  
-   	}
 	
 	//-----------------------------------------------
 		//Opening Frame- setup panel
@@ -329,8 +332,10 @@ public abstract class GUI {
 				frame.getRootPane().requestFocus();
 			}
 		});
+	}
 	
-	
+
+	protected abstract void onClick(MouseEvent e);
 
 	protected abstract void redraw();
 
