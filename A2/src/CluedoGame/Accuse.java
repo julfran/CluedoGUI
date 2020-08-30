@@ -32,7 +32,7 @@ public class Accuse {
         for(int i = 0; i < players.size(); i++){
             if(players.get(i).equals(murderCharacter)){
                 Player accusedPlayer = players.get(i);
-                Set<Card> accusedPlayerHand = accusedPlayer.getHand();
+                ArrayList<Card> accusedPlayerHand = accusedPlayer.getHand();
                 for(int j = 0; j < accusedPlayerHand.size(); j++){
                     //check player's hand for room and weapon
 

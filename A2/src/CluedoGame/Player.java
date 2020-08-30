@@ -2,8 +2,11 @@ package CluedoGame;
 import Cards.Card;
 import Cards.CharacterCard;
 import Cards.RoomCard;
+import Cards.RoomType;
 import Cards.WeaponCard;
+import Cards.WeaponType;
 import Cells.Cell;
+import Cells.RoomCell;
 import GUI.GUIStateType;
 
 import java.util.ArrayList;
