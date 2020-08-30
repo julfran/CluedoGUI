@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Board {
-	public static int BOARD_WIDTH;
-	public static int BOARD_HEIGHT;
+	public final int BOARD_WIDTH = 22;
+	public final int BOARD_HEIGHT= 22;
 	private Cell[][] cell = new Cell[22][22];
 	private int numOfPlayers ;
 	private ArrayList <Player> players;
