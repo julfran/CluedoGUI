@@ -55,7 +55,7 @@ public class Board {
 					"KKKKKK..AAAAAAA..3CCCC\n"+
 					"KKKKKK..AAAAAAA...CCCE\n"+
 					"KKKK1K..2AAAAA2.......\n"+
-					"G.......A+AAA+A.......\n"+
+					"G.......A2AAA2A.......\n"+
 					".................BBB5B\n"+
 					"DDDDD............5BBBB\n"+
 					"DDDDDDDD..|||||..BBBBB\n"+
@@ -152,7 +152,7 @@ public class Board {
 					cell[x][y] = new RoomCell(x,y,kitchen);
 				}
 				else if(c == 'A'){
-					cell[x][y] = new RoomCell(x,y,conservatory);
+					cell[x][y] = new RoomCell(x,y,ballroom);
 				}
 				else if(c == 'D'){
 					cell[x][y] = new RoomCell(x,y,diningRoom);
@@ -171,6 +171,9 @@ public class Board {
 				}
 				else if(c == 'S'){
 					cell[x][y] = new RoomCell(x,y,study);
+				}
+				else if(c == 'C'){
+					cell[x][y] = new RoomCell(x,y,conservatory);
 				}
 				// Door variants
 				else if (c == '1') {
@@ -304,7 +307,7 @@ public class Board {
 		if (c.canTakePlayer()) {
 			p.takeOutOfRoom();
 			if (p.getCell() != null) {
-				if (p.getCell().getClass() == RoomCell.class) {
+				if (c.getClass() == RoomCell.class) {
 					for (Room r : rooms) {
 						if (r.getType() == ((RoomCell) c).getRoomType()) {
 							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
@@ -314,7 +317,7 @@ public class Board {
 						}
 					}
 				}
-				if (p.getCell().getClass() == DoorCell.class) {
+				if (c.getClass() == DoorCell.class) {
 					for (Room r : rooms) {
 						if (r.getType() == ((DoorCell) c).getRoomDoor()) {
 							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
@@ -324,7 +327,7 @@ public class Board {
 						}
 					}
 				}
-				if (p.getCell().getClass() == HallwayCell.class) {
+				if (c.getClass() == HallwayCell.class) {
 					c.putPlayer(p);
 					p.setCell(c);
 				}
@@ -413,33 +416,33 @@ public class Board {
 				}
 				if (top.cell.getXPos() > 0) {
 					Cell left  = cell[top.cell.getXPos() - 1][top.cell.getYPos()];
-					if (left.getClass() == HallwayCell.class) {
+					if (left != null && left.getClass() == HallwayCell.class) {
 						fringe.push(new Fringe(left, top.dist + 1, top));
-					} else if (left.getClass() == RoomCell.class && ((RoomCell) left).isDoor()) {
+					} else if (left != null && left.getClass() == RoomCell.class && ((RoomCell) left).isDoor()) {
 						fringe.push(new Fringe(left, top.dist + 1, top));
 					}
 				}
 				if (top.cell.getXPos() < 21) {
 					Cell right = cell[top.cell.getXPos() + 1][top.cell.getYPos()];
-					if (right.getClass() == HallwayCell.class) {
+					if (right != null && right.getClass() == HallwayCell.class) {
 						fringe.push(new Fringe(right, top.dist + 1, top));
-					} else if (right.getClass() == RoomCell.class && ((RoomCell) right).isDoor()) {
+					} else if (right != null && right.getClass() == RoomCell.class && ((RoomCell) right).isDoor()) {
 						fringe.push(new Fringe(right, top.dist + 1, top));
 					}
 				}
 				if (top.cell.getYPos() > 0) {
 					Cell up = cell[top.cell.getXPos()][top.cell.getYPos() - 1];
-					if (up.getClass() == HallwayCell.class) {
+					if (up != null && up.getClass() == HallwayCell.class) {
 						fringe.push(new Fringe(up, top.dist + 1, top));
-					} else if (up.getClass() == RoomCell.class && ((RoomCell) up).isDoor()) {
+					} else if (up != null && up.getClass() == RoomCell.class && ((RoomCell) up).isDoor()) {
 						fringe.push(new Fringe(up, top.dist + 1, top));
 					}
 				}
 				if (top.cell.getYPos() < 21) {
 					Cell down = cell[top.cell.getXPos()][top.cell.getYPos() + 1];
-					if (down.getClass() == HallwayCell.class) {
+					if (down != null && down.getClass() == HallwayCell.class) {
 						fringe.push(new Fringe(down, top.dist + 1, top));
-					} else if (down.getClass() == RoomCell.class && ((RoomCell) down).isDoor()) {
+					} else if (down != null && down.getClass() == RoomCell.class && ((RoomCell) down).isDoor()) {
 						fringe.push(new Fringe(down, top.dist + 1, top));
 					}
 				}

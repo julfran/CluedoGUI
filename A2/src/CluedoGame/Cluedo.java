@@ -1,6 +1,7 @@
 package CluedoGame;
 
 import Cards.*;
+import Cells.RoomCell;
 import GUI.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.*;
@@ -45,7 +47,7 @@ public class Cluedo extends GUI {
     
 	// Image files
 	private Image background;
-	//Tokens
+	// Tokens:
 	// Characters:
 	private Image tokenScarlett;
 	private Image tokenMustard;
@@ -93,8 +95,8 @@ public class Cluedo extends GUI {
     public Cluedo() {
     	// Load the images
     	try {
-		//Tokens
-		//Characters
+    		//Tokens
+    		//Characters
     		background = ImageIO.read(new File("assets/boardPic.png"));
     		tokenScarlett = ImageIO.read(new File("assets/tokenScarlett.png"));
     		tokenMustard = ImageIO.read(new File("assets/tokenMustard.png"));
@@ -102,14 +104,14 @@ public class Cluedo extends GUI {
     		tokenGreen = ImageIO.read(new File("assets/tokenGreen.png"));
     		tokenPeacock = ImageIO.read(new File("assets/tokenPeacock.png"));
     		tokenPlum = ImageIO.read(new File("assets/tokenPlum.png"));
-		//Weapons
+    		//Weapons
     		tokenCandle = ImageIO.read(new File("assets/tokenCandle.png"));
     		tokenDagger = ImageIO.read(new File("assets/tokenDagger.png"));
     		tokenPipe = ImageIO.read(new File("assets/tokenPipe.png"));
     		tokenRevolver = ImageIO.read(new File("assets/tokenRevolver.png"));
     		tokenRope = ImageIO.read(new File("assets/tokenRope.png"));
     		tokenSpanner = ImageIO.read(new File("assets/tokenSpanner.png"));
-		//Cards
+    		//Cards
     		// Characters:
     		cardScarlett = ImageIO.read(new File("assets/cardScarlett.png"));
     		cardMustard = ImageIO.read(new File("assets/cardMustard.png"));
@@ -571,7 +573,7 @@ public class Cluedo extends GUI {
 		//Check if any players want to refute
 		for(Player pt: playerList){
 			if(!this.equals(pt) && hasSuggested == false){
-				String ref = refute(Player.myCardList, pt, suggestedRoom,
+				String ref = refute(pt.myCardList, pt, suggestedRoom,
 						suggestedCharacter, suggestedWeapon, frame);
 				if(ref != null){
 					return ref;

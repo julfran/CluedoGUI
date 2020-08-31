@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
-	private ArrayList<Card> myCardList = new ArrayList<>();
+	ArrayList<Card> myCardList = new ArrayList<>();
 	private CharacterType myCharacterType;
 	private Cell currentLocation;
 	private String playerName;

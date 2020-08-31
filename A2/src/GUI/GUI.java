@@ -95,7 +95,7 @@ public abstract class GUI {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			endTurn(e);
 			
 		}
 	    
@@ -398,6 +398,7 @@ public abstract class GUI {
 	protected abstract void move(ActionEvent e);
 	protected abstract void suggest(ActionEvent e);
 	protected abstract void accuse(ActionEvent e);
+	protected abstract void endTurn(ActionEvent e);
 
 	protected abstract void redraw();
 
