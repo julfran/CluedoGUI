@@ -298,9 +298,11 @@ public class Board {
 	// False if they didn't
 	public boolean movePlayer(Player p, Cell c) {
 		// TODO: Need to remove player from last location
+		boolean wasInRoom = false;
 		for (Room r : rooms) {
 			if (r.contains(p)) {
 				r.remove(p);
+				wasInRoom = true;
 			}
 		}
 		p.getCell().removePlayer();
@@ -314,6 +316,7 @@ public class Board {
 							p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
 							r.addPlayer(p);
 							p.putInRoom(r);
+							System.out.println("You are now in the " + r.getType() + ", you may now make suggestions.");
 						}
 					}
 				}
@@ -330,6 +333,9 @@ public class Board {
 				if (c.getClass() == HallwayCell.class) {
 					c.putPlayer(p);
 					p.setCell(c);
+					if (wasInRoom) {
+						System.out.println("You are no longer in a room, so you can no longer make suggestions.");
+					}
 				}
 			}
 			return true;
