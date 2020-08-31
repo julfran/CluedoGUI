@@ -25,6 +25,14 @@ public class Room {
 		players.add(p);
 	}
 	
+	public void addCharacter(CharacterType c) {
+		npcs.add(c);
+	}
+	
+	public void addWeapon(WeaponType w) {
+		weapons.add(w);
+	}
+	
 	// Returns true if the room contains the given weapon
 	public boolean contains(WeaponType w) {
 		if (weapons.contains(w)) {
@@ -41,6 +49,14 @@ public class Room {
 		} else {
 			return false;
 		}
+	}
+	
+	public void remove(CharacterType c) {
+		npcs.remove(c);
+	}
+	
+	public void remove(WeaponType w) {
+		weapons.remove(w);
 	}
 	
 	// Returns the coordinates where a given character should be drawn in the room
