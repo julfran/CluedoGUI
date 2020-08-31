@@ -59,6 +59,16 @@ public class Cluedo extends GUI {
 	private Image tokenRevolver;
 	private Image tokenRope;
 	private Image tokenSpanner;
+	// Rooms:
+	private Image tokenBallroom;
+	private Image tokenConservatory;
+	private Image tokenBilliardRoom;
+	private Image tokenLibrary;
+	private Image tokenStudy;
+	private Image tokenHall;
+	private Image tokenLounge;
+	private Image tokenDiningRoom;
+	private Image tokenKitchen;
 	
     RoomCard solutionRoom;
     WeaponCard solutionWeapon;
