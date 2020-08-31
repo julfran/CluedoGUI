@@ -9,16 +9,22 @@ import Cells.RoomCell;
 
 public class Room {
 	
-	RoomType type;
+	private RoomType type;
 	ArrayList<WeaponType> weapons;
 	ArrayList<Player> players;
 	ArrayList<CharacterType> npcs;
+	ArrayList<RoomCell> doors;
 	
 	public Room(RoomType type) {
 		this.type = type;
 		weapons = new ArrayList<WeaponType>();
 		players = new ArrayList<Player>();
 		npcs = new ArrayList<CharacterType>();
+		doors = new ArrayList<RoomCell>();
+	}
+	
+	public RoomType getType() {
+		return type;
 	}
 	
 	public void addDoor(RoomCell c) {
@@ -59,12 +65,24 @@ public class Room {
 		}
 	}
 	
+	public boolean contains(Player p) {
+		if (players.contains(p)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void remove(CharacterType c) {
 		npcs.remove(c);
 	}
 	
 	public void remove(WeaponType w) {
 		weapons.remove(w);
+	}
+	
+	public void remove(Player p) {
+		players.remove(p);
 	}
 	
 	// Returns the coordinates where a given character should be drawn in the room
@@ -389,4 +407,6 @@ public class Room {
 		
 		}
 	}
+
+	
 }
