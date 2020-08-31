@@ -181,14 +181,12 @@ public class Cluedo extends GUI {
         	hasMoved = true;
     	} else {
     		if (hasMoved) {
-			System.out.println("------------------------------");
     			System.out.println("You've already moved, " + activePlayer.getPlayerName());
     		}
     		if (!gameRunning) {
     			System.out.println("You can't move, there's no game running.");
     		}
     		if (hasSuggested) {
-			ystem.out.println("-------------------------------");
     			System.out.println("You can't move after making a suggestion.");
     		}
     	}
@@ -205,7 +203,6 @@ public class Cluedo extends GUI {
     	} else {
     		activePlayer = remainingPlayers.get(0);
     	}
-	System.out.println("-------------------------");	
     	System.out.println(activePlayer.getPlayerName() + "'s turn.");
     	hasMoved = false;
     	hasAccused = false;
@@ -556,90 +553,102 @@ public class Cluedo extends GUI {
     	ArrayList<Card> currentPlayerHand = new ArrayList<Card>(); 
     	ArrayList<Image> playerHandImages = new ArrayList<Image>(); 
     	int x = 580;
-    	int y = 605;
+    	int y = 0;
     	
     	if(activePlayer!=null) {
     	
     		currentPlayerHand = activePlayer.getHand();
-    		int numberOfCards = currentPlayerHand.size();
-    	
 
-    	for(Card i:currentPlayerHand) {
-    		//Weapons
-    		if(i.equals(WeaponType.CANDLESTICK)) {
-    			playerHandImages.add(cardCandle);
+    		for (Card c : currentPlayerHand) {
+    			if (c.getClass() == CharacterCard.class) {
+    				switch (((CharacterCard) c).getCharacter()) {
+					case COLONELMUSTARD:
+						playerHandImages.add(cardMustard);
+						break;
+					case MISSSCARLETT:
+						playerHandImages.add(cardScarlett);
+						break;
+					case MRGREEN:
+						playerHandImages.add(cardGreen);
+						break;
+					case MRSPEACOCK:
+						playerHandImages.add(cardPeacock);
+						break;
+					case MRSWHITE:
+						playerHandImages.add(cardWhite);
+						break;
+					case PROFESSORPLUM:
+						playerHandImages.add(cardPlum);
+						break;
+					default:
+						break;
+					}
+    			}
+    			if (c.getClass() == RoomCard.class) {
+    				switch (((RoomCard) c).getRoom()) {
+					case BALLROOM:
+						playerHandImages.add(cardBallroom);
+						break;
+					case BILLIARDROOM:
+						playerHandImages.add(cardBilliardRoom);
+						break;
+					case CONSERVATORY:
+						playerHandImages.add(cardConservatory);
+						break;
+					case DININGROOM:
+						playerHandImages.add(cardDiningRoom);
+						break;
+					case HALL:
+						playerHandImages.add(cardHall);
+						break;
+					case KITCHEN:
+						playerHandImages.add(cardKitchen);
+						break;
+					case LIBRARY:
+						playerHandImages.add(cardLibrary);
+						break;
+					case LOUNGE:
+						playerHandImages.add(cardLounge);
+						break;
+					case STUDY:
+						playerHandImages.add(cardStudy);
+						break;
+					default:
+						break;
+					}
+    			}
+    			if (c.getClass() == WeaponCard.class) {
+    				switch (((WeaponCard) c).getWeapon()) {
+					case CANDLESTICK:
+						playerHandImages.add(cardCandle);
+						break;
+					case DAGGER:
+						playerHandImages.add(cardDagger);
+						break;
+					case LEADPIPE:
+						playerHandImages.add(cardPipe);
+						break;
+					case REVOLVER:
+						playerHandImages.add(cardRevolver);
+						break;
+					case ROPE:
+						playerHandImages.add(cardRope);
+						break;
+					case SPANNER:
+						playerHandImages.add(cardSpanner);
+						break;
+					default:
+						break;
+					}
+    			}
     		}
-    		if(i.equals(WeaponType.DAGGER)) {
-    			playerHandImages.add(cardDagger);
-    		}
-    		if(i.equals(WeaponType.LEADPIPE)) {
-    			playerHandImages.add(cardPipe);
-    		}
-    		if(i.equals(WeaponType.REVOLVER)) {
-    			playerHandImages.add(cardRevolver);
-    		}
-    		if(i.equals(WeaponType.ROPE)) {
-    			playerHandImages.add(cardRope);
-    		}
-    		if(i.equals(WeaponType.SPANNER)) {
-    			playerHandImages.add(cardSpanner);
-    		}
-    		//Rooms
-    		if(i.equals(RoomType.BALLROOM)) {
-    			playerHandImages.add(cardBallroom);
-    		}
-    		if(i.equals(RoomType.CONSERVATORY)) {
-    			playerHandImages.add(cardConservatory);
-    		}
-    		if(i.equals(RoomType.BILLIARDROOM)) {
-    			playerHandImages.add(cardBilliardRoom);
-    		}
-    		if(i.equals(RoomType.LIBRARY)) {
-    			playerHandImages.add(cardLibrary);
-    		}
-    		if(i.equals(RoomType.STUDY)) {
-    			playerHandImages.add(cardStudy);
-    		}
-    		if(i.equals(RoomType.HALL)) {
-    			playerHandImages.add(cardHall);
-    		}
-    		if(i.equals(RoomType.LOUNGE)) {
-    			playerHandImages.add(cardLounge);
-    		}
-    		if(i.equals(RoomType.DININGROOM)) {
-    			playerHandImages.add(cardDiningRoom);
-    		}
-    		if(i.equals(RoomType.KITCHEN)) {
-    			playerHandImages.add(cardKitchen);
-    		}
-    		//Characters
-    		if(i.equals(CharacterType.MISSSCARLETT)) {
-    			playerHandImages.add(cardScarlett);
-    		}
-    		if(i.equals(CharacterType.COLONELMUSTARD)) {
-    			playerHandImages.add(cardMustard);
-    		}
-    		if(i.equals(CharacterType.MRSWHITE)) {
-    			playerHandImages.add(cardWhite);
-    		}
-    		if(i.equals(CharacterType.MRGREEN)) {
-    			playerHandImages.add(cardGreen);
-    		}
-    		if(i.equals(CharacterType.MRSPEACOCK)) {
-    			playerHandImages.add(cardPeacock);
-    		}
-    		if(i.equals(CharacterType.PROFESSORPLUM)) {
-    			playerHandImages.add(cardPlum);
-    		}
-    	
-    	}
     	}
     	
     	//draw cards on the window pane
     	for(Image i:playerHandImages) {
     		g.drawImage(i, x, y, null);
     		x = x + 85;
-    		if(x>270) {
+    		if(x>1300) {
     			y = y + 110;
     			x = 580;
     		}
@@ -718,14 +727,14 @@ public class Cluedo extends GUI {
         Collections.shuffle(netCards);
 
         //redistribute to other players
-        for(Player p: players){
-            if(netCards.isEmpty()){
-                break;
+        while (!netCards.isEmpty()) {
+        	for(Player p: players){
+                if(netCards.isEmpty()){
+                    break;
+                }
+                p.addHand(netCards.remove(0));
             }
-            p.addHand(netCards.remove(0));
         }
-
-
     }
 
 	

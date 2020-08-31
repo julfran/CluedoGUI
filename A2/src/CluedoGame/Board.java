@@ -292,6 +292,20 @@ public class Board {
 		default:
 			break;}
 	}
+	
+	public void movePlayer(Player p, RoomType rt) {
+		p.getCell().removePlayer();
+		p.takeOutOfRoom();
+		for (Room r : rooms) {
+			if (r.getType() == rt) {
+				cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
+				p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
+				r.addPlayer(p);
+				p.putInRoom(r);
+				System.out.println(p.getPlayerName() + " got moved to the " + r.getType() + " by a suggestion or accusation.");
+			}
+		}
+	}
 
 	// Removes player from previous position and moves them to a new one
 	// Returns true if the player moved

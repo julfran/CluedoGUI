@@ -287,6 +287,9 @@ public abstract class GUI {
 						//startGame.setEnabled(false);
 						return;
 					}
+					//else if(players.size() > 3){
+					//	startGame.setEnabled(true);
+					//}
 					else{
 						opening.setVisible(false);
 						startGame(e, players);
