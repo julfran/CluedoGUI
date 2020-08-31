@@ -18,7 +18,7 @@ import Cards.*;
 
 public abstract class GUI {
 	
-	private JFrame frame;
+	protected JFrame frame;
 	private JPanel topLeftButtons;
 	//private JComponent drawing;
 	private JComponent rightGraphicsPane;
