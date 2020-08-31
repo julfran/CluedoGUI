@@ -270,6 +270,7 @@ public abstract class GUI {
 					//set the players to board game
 					//setup players sequence turns
 					opening.setVisible(false);
+					startGame(e, players);
 				}
 				if(players.size() <3){
 					JOptionPane.showMessageDialog(startGame, "Not Enough players! Please enter" +
