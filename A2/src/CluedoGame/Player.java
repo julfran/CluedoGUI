@@ -85,13 +85,6 @@ public class Player {
 	}
 
 	/**
-	 * @return Set the player to isEliminated equal to true
-	 * */
-	public boolean eliminatePlayer(){
-		return this.isEliminated = true;
-	}
-
-	/**
 	 * @return get current players set of cards
 	 * */
 	public ArrayList <Card> getHand(){
@@ -124,6 +117,10 @@ public class Player {
 	public int getNumSteps(){
 		return numSteps;
 	}
+
+
+
+	
 
 	/**
 	 * Implement the suggest strategy where it get currentPlayer's
