@@ -134,7 +134,7 @@ public class Cluedo extends GUI {
     	String chosenCharacter = null;
     	
     	//repeat until chosen items aren't null
-    	while(cw!=null||cr!=null||cc!=null||chosenWeapon!=null||chosenRoom!=null||chosenCharacter!=null) {
+    	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenRoom==null||chosenCharacter==null) {
 
     		//setup drop down boxes to choose final accusation
     		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
