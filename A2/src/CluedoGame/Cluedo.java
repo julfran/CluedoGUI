@@ -484,13 +484,10 @@ public class Cluedo extends GUI {
 		//If player successfully guesses murder weapons right
 		if(solutionCharacter.characters == c &&
 				solutionWeapon.weapon == w && solutionRoom.rooms == r){
-			return true;
-		}
+					return true;
+				}
 		//else game proceeds
 		//current player is eliminated
-		else {
-			activePlayer.eliminatePlayer();
-		}
 		return false;
 	}
 
