@@ -203,6 +203,7 @@ public abstract class GUI {
 	frame.add(mainPane,BorderLayout.NORTH);
     	frame.pack();
    	frame.setSize(new Dimension(870,660));
+	frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
    	frame.setVisible(true);
 	  
 	
