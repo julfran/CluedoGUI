@@ -18,4 +18,8 @@ public class CharacterCard implements Card {
     public String toString(){
         return characters.toString();
     }
+
+	public CharacterType getCharacter() {
+		return characters;
+	}
 }
