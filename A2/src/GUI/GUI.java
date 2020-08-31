@@ -270,22 +270,26 @@ public abstract class GUI {
 					//need to repaint/show board
 					//set the players to board game
 					//setup players sequence turns
-					opening.setVisible(false);
-					startGame(e, players);
+
+					if(Cluedo.getPlayerList().size() < 3){
+						JOptionPane.showMessageDialog(startGame, "Not Enough players! Please enter" +
+								" at least 3-6 players");
+						textField.grabFocus();
+						//startGame.setEnabled(false);
+						return;
+					}
+					else if(Cluedo.getPlayerList().size() > 3){
+						startGame.setEnabled(true);
+					}
+					else{
+						opening.setVisible(false);
+					}
 				}
-				if(players.size() <3){
-					JOptionPane.showMessageDialog(startGame, "Not Enough players! Please enter" +
-							" at least 3-6 players");
-					return;
-				}
-				if(players.size() > 3){
-					startGame.setEnabled(true);
-				}
+
 
 			}
 		}
 		);
-
 		//add player button to create players
 		JButton addPlayer = new JButton("ADD PLAYER");
 		addPlayer.setBounds(10,180,280,20);
