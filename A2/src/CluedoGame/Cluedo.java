@@ -174,7 +174,7 @@ public class Cluedo extends GUI {
     }
     
     public void move(ActionEvent e) {
-    	if (!hasMoved && gameRunning) {
+    	if (!hasMoved && gameRunning && !hasSuggested) {
     		roll = (int) (Math.random() * 6 + 1) + (int) (Math.random() * 6 + 1);
     		System.out.println("You rolled a: " + roll);
     		waitingForClick = true;
@@ -185,6 +185,9 @@ public class Cluedo extends GUI {
     		}
     		if (!gameRunning) {
     			System.out.println("You can't move, there's no game running.");
+    		}
+    		if (hasSuggested) {
+    			System.out.println("You can't move after making a suggestion.");
     		}
     	}
     }
@@ -208,220 +211,229 @@ public class Cluedo extends GUI {
 	}
 	
     public void suggest(ActionEvent e) {
-    	WeaponType cw = null;
-    	RoomType cr = activePlayer.getRoomType();
-    	CharacterType cc = null;
-    	String chosenWeapon = null;
-    	String chosenCharacter = null;
-    	
-    	//repeat until chosen items aren't null
-    	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenCharacter==null) {
+    	if (!hasSuggested) {
+    		WeaponType cw = null;
+        	RoomType cr = activePlayer.getRoomType();
+        	CharacterType cc = null;
+        	String chosenWeapon = null;
+        	String chosenCharacter = null;
+        	
+        	//repeat until chosen items aren't null
+        	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenCharacter==null) {
 
-    		//setup drop down boxes to choose final accusation
-    		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
-    		chosenWeapon = (String) JOptionPane.showInputDialog(frame,"Choose the weapon","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,weaponChoices,"weapons");
-    		String[] characterChoices = {"Miss Scarlet", "Colonel Mustard", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"};
-    		chosenCharacter = (String) JOptionPane.showInputDialog(frame,"Choose the character","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,characterChoices,"characters");
+        		//setup drop down boxes to choose final accusation
+        		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
+        		chosenWeapon = (String) JOptionPane.showInputDialog(frame,"Choose the weapon","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,weaponChoices,"weapons");
+        		String[] characterChoices = {"Miss Scarlet", "Colonel Mustard", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"};
+        		chosenCharacter = (String) JOptionPane.showInputDialog(frame,"Choose the character","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,characterChoices,"characters");
 
-    		//Weapons
-    		if(chosenWeapon.equals(WeaponType.CANDLESTICK.toString())) {
-    			cw = WeaponType.CANDLESTICK;
-    		}
-    		if(chosenWeapon.equals(WeaponType.DAGGER.toString())) {
-    			cw = WeaponType.DAGGER;
-    		}
-    		if(chosenWeapon.equals(WeaponType.LEADPIPE.toString())) {
-    			cw = WeaponType.LEADPIPE;
-    		}
-    		if(chosenWeapon.equals(WeaponType.REVOLVER.toString())) {
-    			cw = WeaponType.REVOLVER;
-    		}
-    		if(chosenWeapon.equals(WeaponType.ROPE.toString())) {
-    			cw = WeaponType.ROPE;
-    		}
-    		if(chosenWeapon.equals(WeaponType.SPANNER.toString())) {
-    			cw = WeaponType.SPANNER;
-    		}
-    		
-    		
-    		//Characters
-    		if(chosenCharacter.equals("Miss Scarlet")) {
-    			chosenCharacter = "R";
-    		}
-    		if(chosenCharacter.equals("Colonel Mustard")) {
-    			chosenCharacter = "M";
-    		}
-    		if(chosenCharacter.equals("Mrs. White")) {
-    			chosenCharacter = "W";
-    		}
-    		if(chosenCharacter.equals("Mr. Green")) {
-    			chosenCharacter = "G";
-    		}
-    		if(chosenCharacter.equals("Mrs. Peacock")) {
-    			chosenCharacter = "E";
-    		}
-    		if(chosenCharacter.equals("Professor Plum")) {
-    			chosenCharacter = "P";
-    		}
-    		
-    		if(chosenCharacter.equals(CharacterType.MISSSCARLETT.toString())) {
-    			cc = CharacterType.MISSSCARLETT;
-    		}
-    		if(chosenCharacter.equals(CharacterType.COLONELMUSTARD.toString())) {
-    			cc = CharacterType.COLONELMUSTARD;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRSWHITE.toString())) {
-    			cc = CharacterType.MRSWHITE;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRGREEN.toString())) {
-    			cc = CharacterType.MRGREEN;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRSPEACOCK.toString())) {
-    			cc = CharacterType.MRSPEACOCK;
-    		}
-    		if(chosenCharacter.equals(CharacterType.PROFESSORPLUM.toString())) {
-    			cc = CharacterType.PROFESSORPLUM;
-    		}
-    	
+        		//Weapons
+        		if(chosenWeapon.equals(WeaponType.CANDLESTICK.toString())) {
+        			cw = WeaponType.CANDLESTICK;
+        		}
+        		if(chosenWeapon.equals(WeaponType.DAGGER.toString())) {
+        			cw = WeaponType.DAGGER;
+        		}
+        		if(chosenWeapon.equals(WeaponType.LEADPIPE.toString())) {
+        			cw = WeaponType.LEADPIPE;
+        		}
+        		if(chosenWeapon.equals(WeaponType.REVOLVER.toString())) {
+        			cw = WeaponType.REVOLVER;
+        		}
+        		if(chosenWeapon.equals(WeaponType.ROPE.toString())) {
+        			cw = WeaponType.ROPE;
+        		}
+        		if(chosenWeapon.equals(WeaponType.SPANNER.toString())) {
+        			cw = WeaponType.SPANNER;
+        		}
+        		
+        		
+        		//Characters
+        		if(chosenCharacter.equals("Miss Scarlet")) {
+        			chosenCharacter = "R";
+        		}
+        		if(chosenCharacter.equals("Colonel Mustard")) {
+        			chosenCharacter = "M";
+        		}
+        		if(chosenCharacter.equals("Mrs. White")) {
+        			chosenCharacter = "W";
+        		}
+        		if(chosenCharacter.equals("Mr. Green")) {
+        			chosenCharacter = "G";
+        		}
+        		if(chosenCharacter.equals("Mrs. Peacock")) {
+        			chosenCharacter = "E";
+        		}
+        		if(chosenCharacter.equals("Professor Plum")) {
+        			chosenCharacter = "P";
+        		}
+        		
+        		if(chosenCharacter.equals(CharacterType.MISSSCARLETT.toString())) {
+        			cc = CharacterType.MISSSCARLETT;
+        		}
+        		if(chosenCharacter.equals(CharacterType.COLONELMUSTARD.toString())) {
+        			cc = CharacterType.COLONELMUSTARD;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRSWHITE.toString())) {
+        			cc = CharacterType.MRSWHITE;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRGREEN.toString())) {
+        			cc = CharacterType.MRGREEN;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRSPEACOCK.toString())) {
+        			cc = CharacterType.MRSPEACOCK;
+        		}
+        		if(chosenCharacter.equals(CharacterType.PROFESSORPLUM.toString())) {
+        			cc = CharacterType.PROFESSORPLUM;
+        		}
+        	
+        	}
+        	
+        	hasSuggested = true;
+        	//call suggestion on chosen items
+        	doSuggestion(board, players, cr, cc, cw, frame);
+    	} else {
+    		System.out.println("You can't suggest more than once a turn.");
     	}
-    	
-    	
-    	//call suggestion on chosen items
-    	doSuggestion(board, players, cr, cc, cw, frame);
     }
     
     public void accuse(ActionEvent e) {
-    	hasAccused = true;
-    	WeaponType cw = null;
-    	RoomType cr = null;
-    	CharacterType cc = null;
-    	String chosenWeapon = null;
-    	String chosenRoom = null;
-    	String chosenCharacter = null;
-    	
-    	//repeat until chosen items aren't null
-    	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenRoom==null||chosenCharacter==null) {
+    	if (!hasSuggested) {
+    		hasAccused = true;
+        	WeaponType cw = null;
+        	RoomType cr = null;
+        	CharacterType cc = null;
+        	String chosenWeapon = null;
+        	String chosenRoom = null;
+        	String chosenCharacter = null;
+        	
+        	//repeat until chosen items aren't null
+        	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenRoom==null||chosenCharacter==null) {
 
-    		//setup drop down boxes to choose final accusation
-    		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
-    		chosenWeapon = (String) JOptionPane.showInputDialog(frame,"Choose the weapon","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,weaponChoices,"weapons");
-    		String[] roomChoices = {"Kitchen", "Ball Room", "Conservatory", "Dining Room", "Billiard Room", "Library", "Lounge", "Hall", "Study"};
-    		chosenRoom = (String) JOptionPane.showInputDialog(frame,"Choose the room","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,roomChoices,"rooms");
-    		String[] characterChoices = {"Miss Scarlet", "Colonel Mustard", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"};
-    		chosenCharacter = (String) JOptionPane.showInputDialog(frame,"Choose the character","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,characterChoices,"characters");
+        		//setup drop down boxes to choose final accusation
+        		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
+        		chosenWeapon = (String) JOptionPane.showInputDialog(frame,"Choose the weapon","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,weaponChoices,"weapons");
+        		String[] roomChoices = {"Kitchen", "Ball Room", "Conservatory", "Dining Room", "Billiard Room", "Library", "Lounge", "Hall", "Study"};
+        		chosenRoom = (String) JOptionPane.showInputDialog(frame,"Choose the room","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,roomChoices,"rooms");
+        		String[] characterChoices = {"Miss Scarlet", "Colonel Mustard", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"};
+        		chosenCharacter = (String) JOptionPane.showInputDialog(frame,"Choose the character","Customized Dialog",JOptionPane.PLAIN_MESSAGE,null,characterChoices,"characters");
 
-    		//Weapons
-    		if(chosenWeapon.equals(WeaponType.CANDLESTICK.toString())) {
-    			cw = WeaponType.CANDLESTICK;
-    		}
-    		if(chosenWeapon.equals(WeaponType.DAGGER.toString())) {
-    			cw = WeaponType.DAGGER;
-    		}
-    		if(chosenWeapon.equals(WeaponType.LEADPIPE.toString())) {
-    			cw = WeaponType.LEADPIPE;
-    		}
-    		if(chosenWeapon.equals(WeaponType.REVOLVER.toString())) {
-    			cw = WeaponType.REVOLVER;
-    		}
-    		if(chosenWeapon.equals(WeaponType.ROPE.toString())) {
-    			cw = WeaponType.ROPE;
-    		}
-    		if(chosenWeapon.equals(WeaponType.SPANNER.toString())) {
-    			cw = WeaponType.SPANNER;
-    		}
-    		
-    		//Rooms
-    		if(chosenRoom.equals("Ball Room")) {
-    			chosenRoom = "BallRoom";
-    		}
-    		if(chosenRoom.equals("Dining Room")) {
-    			chosenRoom = "DiningRoom";
-    		}
-    		if(chosenRoom.equals("Billiard Room")) {
-    			chosenRoom = "BilliardRoom";
-    		}
-    		
-    		if(chosenRoom.equals(RoomType.BALLROOM.toString())) {
-    			cr = RoomType.BALLROOM;
-    		}
-    		if(chosenRoom.equals(RoomType.CONSERVATORY.toString())) {
-    			cr = RoomType.CONSERVATORY;
-    		}
-    		if(chosenRoom.equals(RoomType.BILLIARDROOM.toString())) {
-    			cr = RoomType.BILLIARDROOM;
-    		}
-    		if(chosenRoom.equals(RoomType.LIBRARY.toString())) {
-    			cr = RoomType.LIBRARY;
-    		}
-    		if(chosenRoom.equals(RoomType.STUDY.toString())) {
-    			cr = RoomType.STUDY;
-    		}
-    		if(chosenRoom.equals(RoomType.HALL.toString())) {
-    			cr = RoomType.HALL;
-    		}
-    		if(chosenRoom.equals(RoomType.LOUNGE.toString())) {
-    			cr = RoomType.LOUNGE;
-    		}
-    		if(chosenRoom.equals(RoomType.DININGROOM.toString())) {
-    			cr = RoomType.DININGROOM;
-    		}
-    		if(chosenRoom.equals(RoomType.KITCHEN.toString())) {
-    			cr = RoomType.KITCHEN;
-    		}
-    		
-    		//Characters
-    		if(chosenCharacter.equals("Miss Scarlet")) {
-    			chosenCharacter = "R";
-    		}
-    		if(chosenCharacter.equals("Colonel Mustard")) {
-    			chosenCharacter = "M";
-    		}
-    		if(chosenCharacter.equals("Mrs. White")) {
-    			chosenCharacter = "W";
-    		}
-    		if(chosenCharacter.equals("Mr. Green")) {
-    			chosenCharacter = "G";
-    		}
-    		if(chosenCharacter.equals("Mrs. Peacock")) {
-    			chosenCharacter = "E";
-    		}
-    		if(chosenCharacter.equals("Professor Plum")) {
-    			chosenCharacter = "P";
-    		}
-    		
-    		if(chosenCharacter.equals(CharacterType.MISSSCARLETT.toString())) {
-    			cc = CharacterType.MISSSCARLETT;
-    		}
-    		if(chosenCharacter.equals(CharacterType.COLONELMUSTARD.toString())) {
-    			cc = CharacterType.COLONELMUSTARD;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRSWHITE.toString())) {
-    			cc = CharacterType.MRSWHITE;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRGREEN.toString())) {
-    			cc = CharacterType.MRGREEN;
-    		}
-    		if(chosenCharacter.equals(CharacterType.MRSPEACOCK.toString())) {
-    			cc = CharacterType.MRSPEACOCK;
-    		}
-    		if(chosenCharacter.equals(CharacterType.PROFESSORPLUM.toString())) {
-    			cc = CharacterType.PROFESSORPLUM;
-    		}
-    	
+        		//Weapons
+        		if(chosenWeapon.equals(WeaponType.CANDLESTICK.toString())) {
+        			cw = WeaponType.CANDLESTICK;
+        		}
+        		if(chosenWeapon.equals(WeaponType.DAGGER.toString())) {
+        			cw = WeaponType.DAGGER;
+        		}
+        		if(chosenWeapon.equals(WeaponType.LEADPIPE.toString())) {
+        			cw = WeaponType.LEADPIPE;
+        		}
+        		if(chosenWeapon.equals(WeaponType.REVOLVER.toString())) {
+        			cw = WeaponType.REVOLVER;
+        		}
+        		if(chosenWeapon.equals(WeaponType.ROPE.toString())) {
+        			cw = WeaponType.ROPE;
+        		}
+        		if(chosenWeapon.equals(WeaponType.SPANNER.toString())) {
+        			cw = WeaponType.SPANNER;
+        		}
+        		
+        		//Rooms
+        		if(chosenRoom.equals("Ball Room")) {
+        			chosenRoom = "BallRoom";
+        		}
+        		if(chosenRoom.equals("Dining Room")) {
+        			chosenRoom = "DiningRoom";
+        		}
+        		if(chosenRoom.equals("Billiard Room")) {
+        			chosenRoom = "BilliardRoom";
+        		}
+        		
+        		if(chosenRoom.equals(RoomType.BALLROOM.toString())) {
+        			cr = RoomType.BALLROOM;
+        		}
+        		if(chosenRoom.equals(RoomType.CONSERVATORY.toString())) {
+        			cr = RoomType.CONSERVATORY;
+        		}
+        		if(chosenRoom.equals(RoomType.BILLIARDROOM.toString())) {
+        			cr = RoomType.BILLIARDROOM;
+        		}
+        		if(chosenRoom.equals(RoomType.LIBRARY.toString())) {
+        			cr = RoomType.LIBRARY;
+        		}
+        		if(chosenRoom.equals(RoomType.STUDY.toString())) {
+        			cr = RoomType.STUDY;
+        		}
+        		if(chosenRoom.equals(RoomType.HALL.toString())) {
+        			cr = RoomType.HALL;
+        		}
+        		if(chosenRoom.equals(RoomType.LOUNGE.toString())) {
+        			cr = RoomType.LOUNGE;
+        		}
+        		if(chosenRoom.equals(RoomType.DININGROOM.toString())) {
+        			cr = RoomType.DININGROOM;
+        		}
+        		if(chosenRoom.equals(RoomType.KITCHEN.toString())) {
+        			cr = RoomType.KITCHEN;
+        		}
+        		
+        		//Characters
+        		if(chosenCharacter.equals("Miss Scarlet")) {
+        			chosenCharacter = "R";
+        		}
+        		if(chosenCharacter.equals("Colonel Mustard")) {
+        			chosenCharacter = "M";
+        		}
+        		if(chosenCharacter.equals("Mrs. White")) {
+        			chosenCharacter = "W";
+        		}
+        		if(chosenCharacter.equals("Mr. Green")) {
+        			chosenCharacter = "G";
+        		}
+        		if(chosenCharacter.equals("Mrs. Peacock")) {
+        			chosenCharacter = "E";
+        		}
+        		if(chosenCharacter.equals("Professor Plum")) {
+        			chosenCharacter = "P";
+        		}
+        		
+        		if(chosenCharacter.equals(CharacterType.MISSSCARLETT.toString())) {
+        			cc = CharacterType.MISSSCARLETT;
+        		}
+        		if(chosenCharacter.equals(CharacterType.COLONELMUSTARD.toString())) {
+        			cc = CharacterType.COLONELMUSTARD;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRSWHITE.toString())) {
+        			cc = CharacterType.MRSWHITE;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRGREEN.toString())) {
+        			cc = CharacterType.MRGREEN;
+        		}
+        		if(chosenCharacter.equals(CharacterType.MRSPEACOCK.toString())) {
+        			cc = CharacterType.MRSPEACOCK;
+        		}
+        		if(chosenCharacter.equals(CharacterType.PROFESSORPLUM.toString())) {
+        			cc = CharacterType.PROFESSORPLUM;
+        		}
+        	
+        	}
+        	
+        	
+        	//call accusation on chosen items
+        	if(doAccusation(cw, cr, cc)) {
+        		System.out.println(activePlayer.getPlayerName() + " has found the culprit. You win!");
+        	}
+        	else { 
+        		System.out.println(activePlayer.getPlayerName() + " has lost and can no longer play");
+        		remainingPlayers.remove(activePlayer);
+        		npcs.add(activePlayer.getCharacterType());
+        		System.out.println("The solution was: " + solutionCharacter + " in the " + solutionRoom + " with the " + solutionWeapon + ".");
+            	endTurn();
+        	}
+    	} else {
+    		System.out.println("You can't suggest and accuse in the same turn.");
     	}
     	
-    	
-    	//call accusation on chosen items
-    	if(doAccusation(cw, cr, cc)) {
-    		System.out.println(activePlayer.getPlayerName() + " has found the culprit. You win!");
-    	}
-    	else { 
-    		System.out.println(activePlayer.getPlayerName() + " has lost and can no longer play");
-    		remainingPlayers.remove(activePlayer);
-    		npcs.add(activePlayer.getCharacterType());
-    		System.out.println("The solution was: " + solutionCharacter + " in the " + solutionRoom + " with the " + solutionWeapon + ".");
-        	endTurn();
-    	}
     }
     
     @Override
@@ -633,25 +645,11 @@ public class Cluedo extends GUI {
 	public String doSuggestion(Board b, ArrayList <Player> playerList, RoomType suggestedRoom,
 								CharacterType suggestedCharacter, WeaponType suggestedWeapon, JFrame frame){
 
-		boolean hasSuggested = false;
-		RoomCell suggestLocation = null;
 		Player p = b.getCurrentPlayer();
-
-		//Check if player has the right Roomcell location then set to suggestedRoom
-		for(Player player: playerList){
-			if(player.getCharacterType() == suggestedCharacter) {
-				if(player.getCell() instanceof RoomCell){
-					if(((RoomCell) player.getCell()).getRoomType() == suggestedRoom){
-						break;
-					}
-				}
-				suggestLocation = (RoomCell) player.getCell();
-			}
-		}
-
+		System.out.println(activePlayer.getPlayerName() + " has suggested " + suggestedRoom + ", " + suggestedCharacter + ", and " + suggestedWeapon + ".");
 		//Check if any players want to refute
 		for(Player pt: playerList){
-			if(!this.equals(pt) && hasSuggested == false){
+			if (!pt.equals(activePlayer)) {
 				String ref = refute(pt.myCardList, pt, suggestedRoom,
 						suggestedCharacter, suggestedWeapon, frame);
 				if(ref != null){
