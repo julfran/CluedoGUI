@@ -21,6 +21,14 @@ public class Room {
 		npcs = new ArrayList<CharacterType>();
 	}
 	
+	public void addDoor(RoomCell c) {
+		doors.add(c);
+	}
+	
+	public ArrayList<RoomCell> getDoors() {
+		return doors;
+	}
+	
 	public void addPlayer(Player p) {
 		players.add(p);
 	}
