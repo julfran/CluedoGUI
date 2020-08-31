@@ -213,6 +213,82 @@ public class Board {
 		}
 	}
 
+	public void moveWeapon(WeaponType w, RoomType r) {
+		for (Room room : rooms) {
+			if (room.contains(w)) {
+				room.remove(w);
+			}
+		}
+		switch (r) {
+		case BALLROOM:
+			ballroom.addWeapon(w);
+			break;
+		case BILLIARDROOM:
+			billiardRoom.addWeapon(w);
+			break;
+		case CONSERVATORY:
+			conservatory.addWeapon(w);
+			break;
+		case DININGROOM:
+			diningRoom.addWeapon(w);
+			break;
+		case HALL:
+			hall.addWeapon(w);
+			break;
+		case KITCHEN:
+			kitchen.addWeapon(w);
+			break;
+		case LIBRARY:
+			library.addWeapon(w);
+			break;
+		case LOUNGE:
+			lounge.addWeapon(w);
+			break;
+		case STUDY:
+			study.addWeapon(w);
+			break;
+		default:
+			break;}
+	}
+	
+	public void moveCharacter(CharacterType c, RoomType r) {
+		for (Room room : rooms) {
+			if (room.contains(c)) {
+				room.remove(c);
+			}
+		}
+		switch (r) {
+		case BALLROOM:
+			ballroom.addCharacter(c);
+			break;
+		case BILLIARDROOM:
+			billiardRoom.addCharacter(c);
+			break;
+		case CONSERVATORY:
+			conservatory.addCharacter(c);
+			break;
+		case DININGROOM:
+			diningRoom.addCharacter(c);
+			break;
+		case HALL:
+			hall.addCharacter(c);
+			break;
+		case KITCHEN:
+			kitchen.addCharacter(c);
+			break;
+		case LIBRARY:
+			library.addCharacter(c);
+			break;
+		case LOUNGE:
+			lounge.addCharacter(c);
+			break;
+		case STUDY:
+			study.addCharacter(c);
+			break;
+		default:
+			break;}
+	}
+	
 	// Removes player from previous position and moves them to a new one
 	// Returns true if the player moved
 	// False if they didn't
