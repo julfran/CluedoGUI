@@ -59,16 +59,6 @@ public class Cluedo extends GUI {
 	private Image tokenRevolver;
 	private Image tokenRope;
 	private Image tokenSpanner;
-	// Rooms:
-	private Image tokenBallroom;
-	private Image tokenConservatory;
-	private Image tokenBilliardRoom;
-	private Image tokenLibrary;
-	private Image tokenStudy;
-	private Image tokenHall;
-	private Image tokenLounge;
-	private Image tokenDiningRoom;
-	private Image tokenKitchen;
 	
     RoomCard solutionRoom;
     WeaponCard solutionWeapon;
@@ -91,7 +81,6 @@ public class Cluedo extends GUI {
     		tokenRope = ImageIO.read(new File("assets/tokenRope.png"));
     		tokenSpanner = ImageIO.read(new File("assets/tokenSpanner.png"));
     	} catch (IOException e) {
-    		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
     }
@@ -115,36 +104,52 @@ public class Cluedo extends GUI {
     			npcs.add(c);
     		}
     	}
-    	System.out.println(players);
+    	System.out.println("Players:");
+    	for (Player player : players) {
+    		System.out.println(player.getPlayerName() + "is playing " + player.getCharacterType());
+    	}
     	board = new Board(players);
     	gameRunning = true;
     	activePlayer = players.get(0);
+    	System.out.println(activePlayer.getPlayerName() + "'s turn.");
     	hasMoved = false;
     	dealCards();
     	redraw();
     }
     
     public void move(ActionEvent e) {
-    	System.out.println(!hasMoved + ", " + gameRunning);
     	if (!hasMoved && gameRunning) {
     		roll = (int) (Math.random() * 6 + 1) + (int) (Math.random() * 6 + 1);
     		System.out.println("You rolled a: " + roll);
     		waitingForClick = true;
         	hasMoved = true;
+    	} else {
+    		if (hasMoved) {
+    			System.out.println("You've already moved, " + activePlayer.getPlayerName());
+    		}
+    		if (!gameRunning) {
+    			System.out.println("You can't move, there's no game running.");
+    		}
     	}
     }
-	
+    
 	public void endTurn(ActionEvent e) {
-    	int x = remainingPlayers.indexOf(activePlayer);
+    	endTurn();
+    }
+
+	public void endTurn() {
+		int x = remainingPlayers.indexOf(activePlayer);
     	if (x + 1 < remainingPlayers.size()) {
     		activePlayer = remainingPlayers.get(x + 1);
     	} else {
     		activePlayer = remainingPlayers.get(0);
     	}
+    	System.out.println(activePlayer.getPlayerName() + "'s turn.");
     	hasMoved = false;
     	hasAccused = false;
     	hasSuggested = false;
-    }
+    	redraw();
+	}
 	
     public void suggest(ActionEvent e) {
     	
@@ -279,6 +284,8 @@ public class Cluedo extends GUI {
     		System.out.println(activePlayer.getPlayerName() + " has lost and can no longer play");
     		remainingPlayers.remove(activePlayer);
     		npcs.add(activePlayer.getCharacterType());
+    		System.out.println("The solution was: " + solutionCharacter + " in the " + solutionRoom + " with the " + solutionWeapon + ".");
+        	endTurn();
     	}
     }
     
@@ -396,18 +403,14 @@ public class Cluedo extends GUI {
 			x = x / CELL_WIDTH;
 			y = y / CELL_HEIGHT;
 			if (x >= 0 && x <= 21 && y >= 0 && y <= 21) {
-				System.out.println(board);
 				if (board.checkPath(activePlayer, new Coord(x, y), roll)) {
-					System.out.println("Old coords: " + activePlayer.getCell().getXPos() + ", " + activePlayer.getCell().getYPos());
 					if (board.movePlayer(activePlayer, board.getCell(x, y))) {
-						System.out.println("New coords: " + activePlayer.getCell().getXPos() + ", " + activePlayer.getCell().getYPos());
-						System.out.println("Moved player");
 						waitingForClick = false;
 					} else {
 						System.out.println("Unknown error occured. Failed to move.");
 					}
 				} else {
-					System.out.println("Failed to find valid path to given point.");
+					System.out.println("Failed to find valid path to given point, please double check your roll.");
 				}
 			}
 		}
