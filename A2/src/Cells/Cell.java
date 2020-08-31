@@ -18,4 +18,7 @@ public interface Cell {
 
     // Returns true if the cell can accept a new player
     public boolean canTakePlayer();
+    
+    // Removes a player
+    public void removePlayer();
 }
