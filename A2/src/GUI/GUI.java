@@ -292,6 +292,7 @@ public abstract class GUI {
 					}
 					else{
 						opening.setVisible(false);
+						startGame(e, players);
 					}
 				}
 
