@@ -708,7 +708,7 @@ public class Cluedo extends GUI {
 		}
 
 		//Player cannot refute as they do not have any of the cards
-		if(!(refuteCharacter && refuteRoom && refuteWeapon)){
+		if(!(refuteCharacter || refuteRoom || refuteWeapon)){
 			return null;
 		}
 
@@ -720,6 +720,8 @@ public class Cluedo extends GUI {
 			refutedCard = refuted.toString();
 		}
 
+		System.out.println("Player" + p.getPlayerName() + "has the " + refutedCard  + "card");
+		
 		return "Player" + p.getPlayerName() + "has the " + refutedCard  + "card";
 	}
 
