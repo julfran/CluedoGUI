@@ -219,7 +219,7 @@ public class Cluedo extends GUI {
         	String chosenCharacter = null;
         	
         	//repeat until chosen items aren't null
-        	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenCharacter==null) {
+        	while(cw==null&&cr==null&&cc==null&&chosenWeapon==null&&chosenCharacter==null) {
 
         		//setup drop down boxes to choose final accusation
         		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
@@ -308,7 +308,7 @@ public class Cluedo extends GUI {
         	String chosenCharacter = null;
         	
         	//repeat until chosen items aren't null
-        	while(cw==null||cr==null||cc==null||chosenWeapon==null||chosenRoom==null||chosenCharacter==null) {
+        	while(cw==null&&cr==null&&cc==null&&chosenWeapon==null&&chosenRoom==null&&chosenCharacter==null) {
 
         		//setup drop down boxes to choose final accusation
         		String[] weaponChoices = {"Candle", "Dagger", "Lead Pipe", "Revolver", "Rope", "Spanner"};
@@ -537,6 +537,99 @@ public class Cluedo extends GUI {
         		}
         	}
     	}	
+		
+	//Draw player hand
+    	ArrayList<Card> currentPlayerHand = new ArrayList<Card>(); 
+    	ArrayList<Image> playerHandImages = new ArrayList<Image>(); 
+    	int x = 580;
+    	int y = 605;
+    	
+    	if(activePlayer!=null) {
+    	
+    		currentPlayerHand = activePlayer.getHand();
+    		int numberOfCards = currentPlayerHand.size();
+    	
+
+    	for(Card i:currentPlayerHand) {
+    		//Weapons
+    		if(i.equals(WeaponType.CANDLESTICK)) {
+    			playerHandImages.add(cardCandle);
+    		}
+    		if(i.equals(WeaponType.DAGGER)) {
+    			playerHandImages.add(cardDagger);
+    		}
+    		if(i.equals(WeaponType.LEADPIPE)) {
+    			playerHandImages.add(cardPipe);
+    		}
+    		if(i.equals(WeaponType.REVOLVER)) {
+    			playerHandImages.add(cardRevolver);
+    		}
+    		if(i.equals(WeaponType.ROPE)) {
+    			playerHandImages.add(cardRope);
+    		}
+    		if(i.equals(WeaponType.SPANNER)) {
+    			playerHandImages.add(cardSpanner);
+    		}
+    		//Rooms
+    		if(i.equals(RoomType.BALLROOM)) {
+    			playerHandImages.add(cardBallroom);
+    		}
+    		if(i.equals(RoomType.CONSERVATORY)) {
+    			playerHandImages.add(cardConservatory);
+    		}
+    		if(i.equals(RoomType.BILLIARDROOM)) {
+    			playerHandImages.add(cardBilliardRoom);
+    		}
+    		if(i.equals(RoomType.LIBRARY)) {
+    			playerHandImages.add(cardLibrary);
+    		}
+    		if(i.equals(RoomType.STUDY)) {
+    			playerHandImages.add(cardStudy);
+    		}
+    		if(i.equals(RoomType.HALL)) {
+    			playerHandImages.add(cardHall);
+    		}
+    		if(i.equals(RoomType.LOUNGE)) {
+    			playerHandImages.add(cardLounge);
+    		}
+    		if(i.equals(RoomType.DININGROOM)) {
+    			playerHandImages.add(cardDiningRoom);
+    		}
+    		if(i.equals(RoomType.KITCHEN)) {
+    			playerHandImages.add(cardKitchen);
+    		}
+    		//Characters
+    		if(i.equals(CharacterType.MISSSCARLETT)) {
+    			playerHandImages.add(cardScarlett);
+    		}
+    		if(i.equals(CharacterType.COLONELMUSTARD)) {
+    			playerHandImages.add(cardMustard);
+    		}
+    		if(i.equals(CharacterType.MRSWHITE)) {
+    			playerHandImages.add(cardWhite);
+    		}
+    		if(i.equals(CharacterType.MRGREEN)) {
+    			playerHandImages.add(cardGreen);
+    		}
+    		if(i.equals(CharacterType.MRSPEACOCK)) {
+    			playerHandImages.add(cardPeacock);
+    		}
+    		if(i.equals(CharacterType.PROFESSORPLUM)) {
+    			playerHandImages.add(cardPlum);
+    		}
+    	
+    	}
+    	}
+    	
+    	//draw cards on the window pane
+    	for(Image i:playerHandImages) {
+    		g.drawImage(i, x, y, null);
+    		x = x + 85;
+    		if(x>270) {
+    			y = y + 110;
+    			x = 580;
+    		}
+    	}
 	}
 	
 	/**
