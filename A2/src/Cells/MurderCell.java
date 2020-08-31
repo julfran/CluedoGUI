@@ -36,4 +36,11 @@ public class MurderCell implements Cell {
 		return false;
 	}
 
+
+	@Override
+	public void removePlayer() {
+		
+		
+	}
+
 }
