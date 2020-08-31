@@ -181,12 +181,14 @@ public class Cluedo extends GUI {
         	hasMoved = true;
     	} else {
     		if (hasMoved) {
+			System.out.println("------------------------------");
     			System.out.println("You've already moved, " + activePlayer.getPlayerName());
     		}
     		if (!gameRunning) {
     			System.out.println("You can't move, there's no game running.");
     		}
     		if (hasSuggested) {
+			ystem.out.println("-------------------------------");
     			System.out.println("You can't move after making a suggestion.");
     		}
     	}
@@ -203,6 +205,7 @@ public class Cluedo extends GUI {
     	} else {
     		activePlayer = remainingPlayers.get(0);
     	}
+	System.out.println("-------------------------");	
     	System.out.println(activePlayer.getPlayerName() + "'s turn.");
     	hasMoved = false;
     	hasAccused = false;
