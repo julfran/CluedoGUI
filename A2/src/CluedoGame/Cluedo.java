@@ -82,7 +82,7 @@ public class Cluedo extends GUI {
     	Cluedo game = new Cluedo();
     }
     
-	public void startGame(ArrayList<Player> p) {
+	public void startGame(ActionEvent e, ArrayList<Player> p) {
     	players = p;
     	Board board = new Board(p);
     }
