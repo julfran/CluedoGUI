@@ -1,5 +1,6 @@
 package CluedoGame;
 import Cards.RoomType;
+import Cards.WeaponType;
 import Cells.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Board {
 	public final int BOARD_WIDTH = 22;
 	public final int BOARD_HEIGHT= 22;
 	private Cell[][] cell = new Cell[22][22];
-	private int numOfPlayers ;
+	private int numOfPlayers;
 	private ArrayList <Player> players;
 	private HashMap <CharacterType, Player> currentPlayers = new HashMap<CharacterType, Player>();
 	private HashMap<RoomType, RoomCell> initCells= new HashMap<RoomType, RoomCell>();
@@ -98,7 +99,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.MRSWHITE) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -106,7 +107,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.MRGREEN) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -114,7 +115,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.COLONELMUSTARD) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -122,7 +123,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.MISSSCARLETT) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -130,7 +131,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.PROFESSORPLUM) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -138,7 +139,7 @@ public class Board {
 					cell[x][y] = new HallwayCell(x,y);
 					for (Player p : players) {
 						if (p.getCharacterType() == CharacterType.MRSPEACOCK) {
-							movePlayer(p, cell[x][y]);
+							p.setCell(cell[x][y]);
 						}
 					}
 				}
@@ -212,7 +213,7 @@ public class Board {
 			}
 		}
 	}
-
+	
 	public void moveWeapon(WeaponType w, RoomType r) {
 		for (Room room : rooms) {
 			if (room.contains(w)) {
@@ -288,13 +289,14 @@ public class Board {
 		default:
 			break;}
 	}
-	
+
 	// Removes player from previous position and moves them to a new one
 	// Returns true if the player moved
 	// False if they didn't
 	public boolean movePlayer(Player p, Cell c) {
 		// TODO: Need to remove player from last location
 		if (c.canTakePlayer()) {
+			p.takeOutOfRoom();
 			if (p.getCell() != null) {
 				if (p.getCell().getClass() == RoomCell.class) {
 					for (Room r : rooms) {
@@ -302,6 +304,7 @@ public class Board {
 							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
 							p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
 							r.addPlayer(p);
+							p.putInRoom(r);
 						}
 					}
 				}
@@ -311,6 +314,7 @@ public class Board {
 							cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()].putPlayer(p);
 							p.setCell(cell[r.getCharacterCell(p.getCharacterType()).x()][r.getCharacterCell(p.getCharacterType()).y()]);
 							r.addPlayer(p);
+							p.putInRoom(r);
 						}
 					}
 				}
@@ -471,4 +475,12 @@ public class Board {
 	public List<DoorCell> getRoomDoors (RoomType room){
 		return Collections.unmodifiableList(roomDoor.get(room));
 	}
+
+	
+
+
+
+	//
+
+
 }
