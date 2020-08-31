@@ -295,6 +295,12 @@ public class Board {
 	// False if they didn't
 	public boolean movePlayer(Player p, Cell c) {
 		// TODO: Need to remove player from last location
+		for (Room r : rooms) {
+			if (r.contains(p)) {
+				r.remove(p);
+			}
+		}
+		p.getCell().removePlayer();
 		if (c.canTakePlayer()) {
 			p.takeOutOfRoom();
 			if (p.getCell() != null) {
