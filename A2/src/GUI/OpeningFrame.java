@@ -151,16 +151,38 @@ public class OpeningFrame extends GUI {
         });
     }
 
-
-
-
-
-
-
-
-
     @Override
     protected void redraw() {
 
     }
+
+	@Override
+	protected void onClick(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void startGame(ActionEvent e, ArrayList<Player> players) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void move(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void accuse(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void suggest(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
