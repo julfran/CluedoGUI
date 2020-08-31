@@ -29,6 +29,8 @@ public class Cluedo extends GUI {
 	private boolean gameRunning = false;
     private Player activePlayer;
     private boolean hasMoved;
+    private boolean hasAccused;
+    private boolean hasSuggested;
 	
     private static boolean isGameOver;
     public int numOfSteps;
