@@ -45,6 +45,7 @@ public class Cluedo extends GUI {
     
 	// Image files
 	private Image background;
+	//Tokens
 	// Characters:
 	private Image tokenScarlett;
 	private Image tokenMustard;
@@ -59,6 +60,31 @@ public class Cluedo extends GUI {
 	private Image tokenRevolver;
 	private Image tokenRope;
 	private Image tokenSpanner;
+	// Cards
+	// Characters:
+	private Image cardScarlett;
+	private Image cardMustard;
+	private Image cardWhite;
+	private Image cardGreen;
+	private Image cardPeacock;
+	private Image cardPlum;
+	// Weapons:
+	private Image cardCandle;
+	private Image cardDagger;
+	private Image cardPipe;
+	private Image cardRevolver;
+	private Image cardRope;
+	private Image cardSpanner;
+	// Rooms:
+	private Image cardBallroom;
+	private Image cardConservatory;
+	private Image cardBilliardRoom;
+	private Image cardLibrary;
+	private Image cardStudy;
+	private Image cardHall;
+	private Image cardLounge;
+	private Image cardDiningRoom;
+	private Image cardKitchen;
 	
     RoomCard solutionRoom;
     WeaponCard solutionWeapon;
@@ -67,6 +93,8 @@ public class Cluedo extends GUI {
     public Cluedo() {
     	// Load the images
     	try {
+		//Tokens
+		//Characters
     		background = ImageIO.read(new File("assets/boardPic.png"));
     		tokenScarlett = ImageIO.read(new File("assets/tokenScarlett.png"));
     		tokenMustard = ImageIO.read(new File("assets/tokenMustard.png"));
@@ -74,12 +102,38 @@ public class Cluedo extends GUI {
     		tokenGreen = ImageIO.read(new File("assets/tokenGreen.png"));
     		tokenPeacock = ImageIO.read(new File("assets/tokenPeacock.png"));
     		tokenPlum = ImageIO.read(new File("assets/tokenPlum.png"));
+		//Weapons
     		tokenCandle = ImageIO.read(new File("assets/tokenCandle.png"));
     		tokenDagger = ImageIO.read(new File("assets/tokenDagger.png"));
     		tokenPipe = ImageIO.read(new File("assets/tokenPipe.png"));
     		tokenRevolver = ImageIO.read(new File("assets/tokenRevolver.png"));
     		tokenRope = ImageIO.read(new File("assets/tokenRope.png"));
     		tokenSpanner = ImageIO.read(new File("assets/tokenSpanner.png"));
+		//Cards
+    		// Characters:
+    		cardScarlett = ImageIO.read(new File("assets/cardScarlett.png"));
+    		cardMustard = ImageIO.read(new File("assets/cardMustard.png"));
+    		cardWhite = ImageIO.read(new File("assets/cardWhite.png"));
+    		cardGreen = ImageIO.read(new File("assets/cardGreen.png"));
+    		cardPeacock = ImageIO.read(new File("assets/cardPeacock.png"));
+    		cardPlum = ImageIO.read(new File("assets/cardPlum.png"));
+    		// Weapons:
+    		cardCandle = ImageIO.read(new File("assets/cardCandle.png"));
+    		cardDagger = ImageIO.read(new File("assets/cardDagger.png"));
+    		cardPipe = ImageIO.read(new File("assets/cardPipe.png"));
+    		cardRevolver = ImageIO.read(new File("assets/cardRevolver.png"));
+    		cardRope = ImageIO.read(new File("assets/cardRope.png"));
+    		cardSpanner = ImageIO.read(new File("assets/cardSpanner.png"));
+    		// Rooms:
+    		cardBallroom = ImageIO.read(new File("assets/cardBallroom.png"));
+    		cardConservatory = ImageIO.read(new File("assets/cardConservatory.png"));
+    		cardBilliardRoom = ImageIO.read(new File("assets/cardBilliards.png"));
+    		cardLibrary = ImageIO.read(new File("assets/cardLibrary.png"));
+    		cardStudy = ImageIO.read(new File("assets/cardStudy.png"));
+    		cardHall = ImageIO.read(new File("assets/cardHall.png"));
+    		cardLounge = ImageIO.read(new File("assets/cardLounge.png"));
+    		cardDiningRoom = ImageIO.read(new File("assets/cardDining.png"));
+    		cardKitchen = ImageIO.read(new File("assets/cardKitchen.png"));
     	} catch (IOException e) {
     		e.printStackTrace();
     	}
