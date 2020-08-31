@@ -87,14 +87,6 @@ public class Cluedo extends GUI {
     	Board board = new Board(p);
     }
 	
-		public static ArrayList <Player> getPlayerList(){
-		return players;
-	}
-
-	public Player getTopPlayer(int index, Player p){
-		players.add(index,p);
-		return p;
-	}
 	
     @Override
 	protected void redraw() {
