@@ -213,11 +213,11 @@ public abstract class GUI {
 		//POPUP WINDOW
 
 		opening = new JPanel();
-		opening.setBounds(10,80,200,30);
+		opening.setBounds(10,80,200,100);
 		frame.getContentPane().add(opening);
 		String[] choices = {"MISSSCARLETT", "COLONELMUSTARD", "MRSWHITE",
 								"MRGREEN", "MRSPEACOCK", "PROFESSORPLUM"};
-		JLabel heading = new JLabel("CLUEDO GAME: ENTER YOUR NAME AND CHARACTER.");
+		JLabel heading = new JLabel("CLUEDO GAME: ENTER YOUR NAME AND CHARACTER:");
 		opening.add(heading);
 
 		//Selection list of players
@@ -255,7 +255,16 @@ public abstract class GUI {
 		textField = new JTextField(20);
 		textField.setBounds(10,50,80,20);
 		opening.add(textField);
-		textField.setText("ENTER USERNAME HERE");
+		textField.setText("ENTER USERNAME HERE...");
+		textField.addMouseListener(
+				new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						textField.setText("");
+					}
+				}
+		);
+
 
 		//press start game button when players finish enter their username
 		JButton startGame = new JButton("Start Game");
@@ -271,14 +280,14 @@ public abstract class GUI {
 					//set the players to board game
 					//setup players sequence turns
 
-					if(Cluedo.getPlayerList().size() < 3){
+					if(players.size() < 3){
 						JOptionPane.showMessageDialog(startGame, "Not Enough players! Please enter" +
 								" at least 3-6 players");
 						textField.grabFocus();
 						//startGame.setEnabled(false);
 						return;
 					}
-					else if(Cluedo.getPlayerList().size() > 3){
+					else if(players.size() > 3){
 						startGame.setEnabled(true);
 					}
 					else{
@@ -290,7 +299,7 @@ public abstract class GUI {
 			}
 		}
 		);
-		
+
 		//add player button to create players
 		JButton addPlayer = new JButton("ADD PLAYER");
 		addPlayer.setBounds(10,180,280,20);
@@ -306,7 +315,7 @@ public abstract class GUI {
 					return;
 				}
 				//check if username text already exists in
-				for(Player p: Cluedo.getPlayerList()) {
+				for(Player p: players) {
 					if (p.getPlayerName().equals(textField.getText())) {
 						JOptionPane.showMessageDialog(addPlayer, "USERNAME ALREADY EXIST. " +
 								"PLEASE ENTER ANOTHER NAME");
@@ -317,32 +326,32 @@ public abstract class GUI {
 
 				if(missScarlett.isEnabled() && missScarlett.isSelected()){
 					missScarlett.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.MISSSCARLETT, username));
+					players.add(new Player(CharacterType.MISSSCARLETT, username));
 				}
 
 				else if(colonelMustard.isEnabled() && colonelMustard.isSelected()){
 					colonelMustard.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.COLONELMUSTARD, username));
+					players.add(new Player(CharacterType.COLONELMUSTARD, username));
 				}
 
 				else if(mrsWhite.isEnabled() && mrsWhite.isSelected()){
 					mrsWhite.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.MRSWHITE, username));
+					players.add(new Player(CharacterType.MRSWHITE, username));
 				}
 
 				else if(mrsPeacock.isEnabled() && mrsPeacock.isSelected()){
 					mrsPeacock.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.MRSPEACOCK, username));
+					players.add(new Player(CharacterType.MRSPEACOCK, username));
 				}
 
 				else if(professorPlum.isEnabled() && professorPlum.isSelected()){
 					professorPlum.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.PROFESSORPLUM, username));
+					players.add(new Player(CharacterType.PROFESSORPLUM, username));
 				}
 
 				else if(mrGreen.isEnabled() && mrGreen.isSelected()){
 					mrGreen.setEnabled(false);
-					Cluedo.getPlayerList().add(new Player(CharacterType.MRGREEN, username));
+					players.add(new Player(CharacterType.MRGREEN, username));
 				}
 				else {
 					JOptionPane.showMessageDialog(addPlayer, "NO PLAYERS ENTERED. Please enter" +
@@ -350,13 +359,12 @@ public abstract class GUI {
 					return;
 				}
 
-				if(Cluedo.getPlayerList().size() >6 ){
+				if(players.size() >6 ){
 					JOptionPane.showMessageDialog(startGame, "THERE'S TOO MANY PLAYERS! Please enter" +
 							" at least 3-6 players");
 					addPlayer.setEnabled(false);
 					return;
 				}
-
 				else{
 					addPlayer.setEnabled(true);
 				}
