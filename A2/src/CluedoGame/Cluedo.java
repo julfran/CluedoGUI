@@ -106,6 +106,18 @@ public class Cluedo extends GUI {
     	}
     }
 	
+	public void endTurn(ActionEvent e) {
+    	int x = players.indexOf(activePlayer);
+    	if (x + 1 < players.size()) {
+    		activePlayer = players.get(x + 1);
+    	} else {
+    		activePlayer = players.get(0);
+    	}
+    	hasMoved = false;
+    	hasAccused = false;
+    	hasSuggested = false;
+    }
+	
     public void suggest(ActionEvent e) {
     	
     }
