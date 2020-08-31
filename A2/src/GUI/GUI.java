@@ -71,7 +71,7 @@ public abstract class GUI {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			// call suggest method
-			
+			suggest(e);
 		}
 	    
     });
@@ -84,7 +84,7 @@ public abstract class GUI {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			// call accuse method
-			
+			accuse(e);
 		}
 	    
     });
@@ -396,6 +396,8 @@ public abstract class GUI {
 	protected abstract void onClick(MouseEvent e);
 	protected abstract void startGame(ActionEvent e, ArrayList<Player> players);
 	protected abstract void move(ActionEvent e);
+	protected abstract void suggest(ActionEvent e);
+	protected abstract void accuse(ActionEvent e);
 
 	protected abstract void redraw();
 
