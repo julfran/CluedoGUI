@@ -371,6 +371,7 @@ public abstract class GUI {
 	
 
 	protected abstract void onClick(MouseEvent e);
+	protected abstract void startGame(ActionEvent e, ArrayList<Player> players);
 
 	protected abstract void redraw();
 
