@@ -1,7 +1,10 @@
 package CluedoGame;
 
 import Cards.Card;
+import Cards.CharacterCard;
+import Cards.RoomCard;
 import Cards.RoomType;
+import Cards.WeaponCard;
 import Cards.WeaponType;
 
 import java.util.ArrayList;
