@@ -106,7 +106,8 @@ public abstract class GUI {
     JButton quit = new JButton("Quit");
     	quit.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			System.exit(0); //quit game
+    			//System.exit(0); //quit game
+			quit();
     		}
     });
     //---------------------------------------------------------------------------------
