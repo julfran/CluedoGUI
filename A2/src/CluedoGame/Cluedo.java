@@ -76,13 +76,17 @@ public class Cluedo extends GUI {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
-    	Board board = new Board(players);
     }
     
     public static void main(String args[]) {
     	Cluedo game = new Cluedo();
     }
     
+	public void startGame(ArrayList<Player> p) {
+    	players = p;
+    	Board board = new Board(p);
+    }
+	
     @Override
 	protected void redraw() {
 		// TODO Auto-generated method stub
