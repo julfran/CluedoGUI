@@ -67,4 +67,68 @@ public class RoomCell implements Cell {
 	public boolean canTakePlayer() {
 		return true;
 	}
+
+
+	@Override
+	public void removePlayer() {
+		player = null;
+		
+	}
+
+//	private int x;
+//	private int y;
+//	private Board board;
+//	private Player player = null;
+//	private RoomType type;
+//
+//	public RoomCell(int x, int y, RoomType type) {
+//		this.x = x;
+//		this.y = y;
+//		this.board = board;
+//		this.type = type;
+//	}
+//
+//	public int getX() {
+//		return x;
+//	}
+//
+//	public int getY() {
+//		return y;
+//	}
+//
+//	public RoomType getType() {
+//		return type;
+//	}
+//
+//	public boolean isOccupied() {
+//		if (player != null) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	public Player getPlayer() {
+//		if (isOccupied()) {
+//			return player;
+//		} else {
+//			return null;
+//		}
+//	}
+//
+//	public boolean placePlayer(Player p) {
+//		if (!isOccupied()) {
+//			player = p;
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	public void removePlayer() {
+//		player = null;
+//	}
+
+
+
 }
