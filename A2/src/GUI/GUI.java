@@ -265,11 +265,21 @@ public abstract class GUI {
 			public void actionPerformed(ActionEvent e) {
 				frame.getRootPane().requestFocus();
 				if(startGame.isEnabled()){
-					opening.setVisible(false);
+
 					//need to repaint/show board
 					//set the players to board game
 					//setup players sequence turns
+					opening.setVisible(false);
 				}
+				if(players.size() <3){
+					JOptionPane.showMessageDialog(startGame, "Not Enough players! Please enter" +
+							" at least 3-6 players");
+					return;
+				}
+				if(players.size() > 3){
+					startGame.setEnabled(true);
+				}
+
 			}
 		}
 		);
@@ -326,13 +336,11 @@ public abstract class GUI {
 					players.add(new Player(CharacterType.MRGREEN, username));
 				}
 
-				if(players.size() >=3){
-					startGame.setEnabled(true);
-				}
 				if(players.size() >6 ){
 					JOptionPane.showMessageDialog(startGame, "THERE'S TOO MANY PLAYERS! Please enter" +
 							" at least 3-6 players");
 					startGame.setEnabled(false);
+					return;
 				}
 				else{
 					startGame.setEnabled(true);
