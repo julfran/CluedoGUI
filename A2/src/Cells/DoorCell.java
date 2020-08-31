@@ -55,5 +55,11 @@ public class DoorCell implements Cell {
 		return false;
 	}
 
+	@Override
+	public void removePlayer() {
+		player = null;
+		
+	}
+
 
 }
