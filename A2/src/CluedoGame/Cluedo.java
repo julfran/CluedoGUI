@@ -38,6 +38,7 @@ public class Cluedo extends GUI {
     private static Board board;
     private boolean gameWon = false;
     private ArrayList<Player> players;
+    private ArrayList<Player> remainingPlayers;
     private ArrayList<Card> solutionSet = new ArrayList<>();
 	private ArrayList<CharacterType> npcs; // The characters that aren't being played
 	private ArrayList<WeaponType> weapons;
@@ -91,11 +92,25 @@ public class Cluedo extends GUI {
     
     public void startGame(ActionEvent e, ArrayList<Player> p) {
     	players = p;
+    	remainingPlayers = new ArrayList<Player>(p);
+    	npcs = new ArrayList<CharacterType>();
+    	for (CharacterType c : CharacterType.values()) {
+    		boolean npc = true;
+    		for (Player player : remainingPlayers) {
+    			if (player.getCharacterType() == c) {
+    				npc = false;
+    			}
+    		}
+    		if (npc) {
+    			npcs.add(c);
+    		}
+    	}
     	System.out.println(players);
     	board = new Board(players);
     	gameRunning = true;
     	activePlayer = players.get(0);
     	hasMoved = false;
+    	dealCards();
     	redraw();
     }
     
@@ -110,11 +125,11 @@ public class Cluedo extends GUI {
     }
 	
 	public void endTurn(ActionEvent e) {
-    	int x = players.indexOf(activePlayer);
-    	if (x + 1 < players.size()) {
-    		activePlayer = players.get(x + 1);
+    	int x = remainingPlayers.indexOf(activePlayer);
+    	if (x + 1 < remainingPlayers.size()) {
+    		activePlayer = remainingPlayers.get(x + 1);
     	} else {
-    		activePlayer = players.get(0);
+    		activePlayer = remainingPlayers.get(0);
     	}
     	hasMoved = false;
     	hasAccused = false;
@@ -126,6 +141,7 @@ public class Cluedo extends GUI {
     }
     
     public void accuse(ActionEvent e) {
+    	hasAccused = true;
     	WeaponType cw = null;
     	RoomType cr = null;
     	CharacterType cc = null;
@@ -251,6 +267,8 @@ public class Cluedo extends GUI {
     	}
     	else { 
     		System.out.println(activePlayer.getPlayerName() + " has lost and can no longer play");
+    		remainingPlayers.remove(activePlayer);
+    		npcs.add(activePlayer.getCharacterType());
     	}
     }
     
@@ -269,8 +287,8 @@ public class Cluedo extends GUI {
 	protected void draw(Graphics g) {
     	g.drawImage(background, 0,0,580,605,null);
     	// Draw the players:
-    	if (players != null) {
-    		for (Player p : players) {
+    	if (remainingPlayers != null) {
+    		for (Player p : remainingPlayers) {
     			if (p.getCell() != null) {
     				if (p.getCharacterType() == CharacterType.MISSSCARLETT) {
             			g.drawImage(tokenScarlett, p.getX()*CELL_WIDTH, p.getY()*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, null);
@@ -455,9 +473,6 @@ public class Cluedo extends GUI {
 				}
 		//else game proceeds
 		//current player is eliminated
-		else {
-			activePlayer.eliminatePlayer();
-		}
 		return false;
 	}
 
