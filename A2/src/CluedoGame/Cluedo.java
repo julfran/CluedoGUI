@@ -422,6 +422,17 @@ public class Cluedo extends GUI {
         	//call accusation on chosen items
         	if(doAccusation(cw, cr, cc)) {
         		System.out.println(activePlayer.getPlayerName() + " has found the culprit. You win!");
+			int reply = JOptionPane.showConfirmDialog(frame,activePlayer.getPlayerName() + " has won the game!!!",
+        				"Game Over", JOptionPane.YES_NO_OPTION);
+        		if(reply == JOptionPane.YES_OPTION){
+        			System.exit(0);
+        		}
+        		if (reply == JOptionPane.NO_OPTION) {
+        			System.exit(0);
+        		}
+        		else{
+        			frame.getRootPane().requestFocus();
+        		}
         	}
         	else { 
         		System.out.println(activePlayer.getPlayerName() + " has lost and can no longer play");
