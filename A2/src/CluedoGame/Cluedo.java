@@ -473,7 +473,9 @@ public class Cluedo extends GUI {
 
 
     }
-/**
+
+	
+	/**
 	 * Implements the accuse strategy where it checks if the accused
 	 * elements al match the murder set.
 	 * */
@@ -482,11 +484,111 @@ public class Cluedo extends GUI {
 		//If player successfully guesses murder weapons right
 		if(solutionCharacter.characters == c &&
 				solutionWeapon.weapon == w && solutionRoom.rooms == r){
-					return true;
-				}
+			return true;
+		}
 		//else game proceeds
 		//current player is eliminated
+		else {
+			activePlayer.eliminatePlayer();
+		}
 		return false;
+	}
+
+	/**
+	 * Implement the suggest strategy where it get currentPlayer's
+	 * Room type and record the suggestion set.
+	 * */
+	public String doSuggestion(Board b, ArrayList <Player> playerList, RoomType suggestedRoom,
+								CharacterType suggestedCharacter, WeaponType suggestedWeapon, JFrame frame){
+
+		boolean hasSuggested = false;
+		RoomCell suggestLocation = null;
+		Player p = b.getCurrentPlayer();
+
+		//Check if player has the right Roomcell location then set to suggestedRoom
+		for(Player player: playerList){
+			if(player.getCharacterType() == suggestedCharacter) {
+				if(player.getCell() instanceof RoomCell){
+					if(((RoomCell) player.getCell()).getRoomType() == suggestedRoom){
+						break;
+					}
+				}
+				suggestLocation = (RoomCell) player.getCell();
+			}
+		}
+
+		//Check if any players want to refute
+		for(Player pt: playerList){
+			if(!this.equals(pt) && hasSuggested == false){
+				String ref = refute(Player.myCardList, pt, suggestedRoom,
+						suggestedCharacter, suggestedWeapon, frame);
+				if(ref != null){
+					return ref;
+				}
+			}
+		}
+		String message = "No one has refuted this suggestion";
+		JOptionPane.showMessageDialog(null,message);
+		return message;
+	}
+
+	/**
+	 * This handles the refuting process when the opposing
+	 * player wants to refuse the suggested set of the current player
+	 * via getting a card in their own deck
+	 *
+	 * @param hand	the opposing players deck of cards
+	 *
+	 * @param room	suggested room
+	 *
+	 * @param character	suggested character
+	 *
+	 * @param weapon	suggested weapon
+	 *
+	 * @param frame		fame it is currently being displayed
+	 *
+	 * @return opposing player's name and its refuting card
+	 *
+	 * */
+	private String refute(ArrayList<Card> hand, Player p, RoomType room,
+						  CharacterType character, WeaponType weapon, JFrame frame){
+
+		ArrayList<String> refuteList = new ArrayList<>();
+		String refutedCard = "";
+		boolean refuteCharacter = false;
+		boolean refuteRoom = false;
+		boolean refuteWeapon = false;
+
+		//Check players hand if they have the suggested set/one of the suggested cards
+		for(Card c: hand){
+			if(c instanceof CharacterCard && ((CharacterCard)c).characters == character){
+				refuteCharacter = true;
+				refuteList.add(character.toString());
+			}
+			else if(c instanceof RoomCard && ((RoomCard)c).rooms == room){
+				refuteRoom = true;
+				refuteList.add(room.toString());
+			}
+			else if(c instanceof WeaponCard && ((WeaponCard)c).weapon == weapon){
+				refuteWeapon = true;
+				refuteList.add(weapon.toString());
+			}
+		}
+
+		//Player cannot refute as they do not have any of the cards
+		if(!(refuteCharacter && refuteRoom && refuteWeapon)){
+			return null;
+		}
+
+
+		Object refuted = JOptionPane.showInputDialog(frame, "Select your refute:",
+				this.toString() + ":", JOptionPane.DEFAULT_OPTION, null,
+				refuteList.toArray(), "0");
+		if(refuted != null){
+			refutedCard = refuted.toString();
+		}
+
+		return "Player" + p.getPlayerName() + "has the " + refutedCard  + "card";
 	}
 
 	
