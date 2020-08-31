@@ -302,6 +302,24 @@ public class Cluedo extends GUI {
 
 
     }
+/**
+	 * Implements the accuse strategy where it checks if the accused
+	 * elements al match the murder set.
+	 * */
+	public boolean doAccusation(WeaponType w, RoomType r, CharacterType c) {
+
+		//If player successfully guesses murder weapons right
+		if(solutionCharacter.characters == c &&
+				solutionWeapon.weapon == w && solutionRoom.rooms == r){
+					return true;
+				}
+		//else game proceeds
+		//current player is eliminated
+		else {
+			activePlayer.eliminatePlayer();
+		}
+		return false;
+	}
 
 	
 
