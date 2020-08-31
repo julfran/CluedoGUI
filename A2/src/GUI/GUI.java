@@ -290,6 +290,7 @@ public abstract class GUI {
 			}
 		}
 		);
+		
 		//add player button to create players
 		JButton addPlayer = new JButton("ADD PLAYER");
 		addPlayer.setBounds(10,180,280,20);
@@ -300,56 +301,64 @@ public abstract class GUI {
 				String username = textField.getText();
 				if(username.equals("")){
 					JOptionPane.showMessageDialog(addPlayer, "NO NAME ENTERED.PLEASE ENTER A NAME:");
-					addPlayer.setEnabled(false);
+					//addPlayer.setEnabled(false);
+					textField.grabFocus();
 					return;
 				}
-
-				for(Player p: players) {
+				//check if username text already exists in
+				for(Player p: Cluedo.getPlayerList()) {
 					if (p.getPlayerName().equals(textField.getText())) {
 						JOptionPane.showMessageDialog(addPlayer, "USERNAME ALREADY EXIST. " +
 								"PLEASE ENTER ANOTHER NAME");
+						textField.grabFocus();
 						return;
 					}
 				}
 
 				if(missScarlett.isEnabled() && missScarlett.isSelected()){
 					missScarlett.setEnabled(false);
-					players.add(new Player(CharacterType.MISSSCARLETT, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.MISSSCARLETT, username));
 				}
 
-				if(colonelMustard.isEnabled() && colonelMustard.isSelected()){
+				else if(colonelMustard.isEnabled() && colonelMustard.isSelected()){
 					colonelMustard.setEnabled(false);
-					players.add(new Player(CharacterType.COLONELMUSTARD, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.COLONELMUSTARD, username));
 				}
 
-				if(mrsWhite.isEnabled() && mrsWhite.isSelected()){
+				else if(mrsWhite.isEnabled() && mrsWhite.isSelected()){
 					mrsWhite.setEnabled(false);
-					players.add(new Player(CharacterType.MRSWHITE, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.MRSWHITE, username));
 				}
 
-				if(mrsPeacock.isEnabled() && mrsPeacock.isSelected()){
+				else if(mrsPeacock.isEnabled() && mrsPeacock.isSelected()){
 					mrsPeacock.setEnabled(false);
-					players.add(new Player(CharacterType.MRSPEACOCK, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.MRSPEACOCK, username));
 				}
 
-				if(professorPlum.isEnabled() && professorPlum.isSelected()){
+				else if(professorPlum.isEnabled() && professorPlum.isSelected()){
 					professorPlum.setEnabled(false);
-					players.add(new Player(CharacterType.PROFESSORPLUM, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.PROFESSORPLUM, username));
 				}
 
-				if(mrGreen.isEnabled() && mrGreen.isSelected()){
+				else if(mrGreen.isEnabled() && mrGreen.isSelected()){
 					mrGreen.setEnabled(false);
-					players.add(new Player(CharacterType.MRGREEN, username));
+					Cluedo.getPlayerList().add(new Player(CharacterType.MRGREEN, username));
 				}
-
-				if(players.size() >6 ){
-					JOptionPane.showMessageDialog(startGame, "THERE'S TOO MANY PLAYERS! Please enter" +
+				else {
+					JOptionPane.showMessageDialog(addPlayer, "NO PLAYERS ENTERED. Please enter" +
 							" at least 3-6 players");
-					startGame.setEnabled(false);
 					return;
 				}
+
+				if(Cluedo.getPlayerList().size() >6 ){
+					JOptionPane.showMessageDialog(startGame, "THERE'S TOO MANY PLAYERS! Please enter" +
+							" at least 3-6 players");
+					addPlayer.setEnabled(false);
+					return;
+				}
+
 				else{
-					startGame.setEnabled(true);
+					addPlayer.setEnabled(true);
 				}
 				frame.getRootPane().requestFocus();
 			}
