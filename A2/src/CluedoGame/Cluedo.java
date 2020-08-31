@@ -105,6 +105,14 @@ public class Cluedo extends GUI {
         	hasMoved = true;
     	}
     }
+	
+    public void suggest(ActionEvent e) {
+    	
+    }
+    
+    public void accuse(ActionEvent e) {
+    	
+    }
     
     @Override
 	protected void redraw() {
