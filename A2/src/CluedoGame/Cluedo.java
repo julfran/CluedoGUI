@@ -108,7 +108,7 @@ public class Cluedo extends GUI {
     
     @Override
 	protected void redraw() {
-		// TODO Auto-generated method stub
+		frame.repaint();
 		
 	}
     
@@ -222,7 +222,10 @@ public class Cluedo extends GUI {
 			if (x >= 0 && x <= 21 && y >= 0 && y <= 21) {
 				System.out.println(board);
 				if (board.checkPath(activePlayer, new Coord(x, y), roll)) {
+					System.out.println("Old coords: " + activePlayer.getCell().getXPos() + ", " + activePlayer.getCell().getYPos());
 					if (board.movePlayer(activePlayer, board.getCell(x, y))) {
+						System.out.println("New coords: " + activePlayer.getCell().getXPos() + ", " + activePlayer.getCell().getYPos());
+						System.out.println("Moved player");
 						waitingForClick = false;
 					} else {
 						System.out.println("Unknown error occured. Failed to move.");
@@ -232,6 +235,7 @@ public class Cluedo extends GUI {
 				}
 			}
 		}
+		redraw();
 	}
 	
     /**
@@ -289,5 +293,8 @@ public class Cluedo extends GUI {
         }
 
 
-    }	
+    }
+
+	
+
 }
