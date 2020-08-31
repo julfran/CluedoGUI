@@ -42,6 +42,12 @@ public class HallwayCell implements Cell {
 		}
 	}
 
+	@Override
+	public void removePlayer() {
+		player = null;
+		
+	}
+
 
 //	private int x;
 //	private int y;
